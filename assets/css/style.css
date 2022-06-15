@@ -55,8 +55,14 @@ footer{
 }
 
 .video-item{
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
     border: 1px solid black;
     margin: 5px;
     padding-bottom: 10px;
 } 
+
+.video-img{
+    border-radius: 10%;
+}

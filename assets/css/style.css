@@ -1,0 +1,62 @@
+header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 5px;
+    padding-bottom: 10px;
+}
+
+main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    margin: 5px;
+    padding-bottom: 10px;
+}
+#concert{
+    display: flex-row;
+    width: 50%;
+    text-align: center;
+    border: 1px solid black;
+    margin: 5px;
+    padding-bottom: 10px;
+}
+
+#artist-bio{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-grow: 1;
+    border: 1px solid black;
+    margin: 5px;
+    padding-bottom: 10px;
+}
+
+footer{
+    display: flex-row;
+    justify-content: space-between;
+    text-align: center;
+    border: 1px solid black;
+    margin: 5px;
+    padding-bottom: 10px;
+}
+.video-container{
+    margin: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    margin: 5px;
+    padding-bottom: 10px;
+}
+
+.video-item{
+    width: 100%;
+    border: 1px solid black;
+    margin: 5px;
+    padding-bottom: 10px;
+} 

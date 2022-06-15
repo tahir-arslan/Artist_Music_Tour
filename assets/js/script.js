@@ -43,12 +43,22 @@ var getArtistConcerts = function (){
                 console.log(data);
                 console.log("The first event is " + data.resultsPage.results.event[0].displayName)
 
-                // setting variable for location of UL for discography, creating li element and giving it value, appending
-                firstConcert = data.resultsPage.results.event[0].displayName;
+
+                // variable for concerts UL location
                 var Concertslocation = document.querySelector("#concert-listings");
+
+                // clearing previous search li elements
+                Concertslocation.innerHTML = "";
+
+                // setting variable for location of UL for concerts, creating li element and giving it value, appending
+                
+               
+                for (i=0; i <=7 ; i++) {
+                ConcertList = data.resultsPage.results.event[i].displayName;
                 var createLiItem = document.createElement("li");
-                createLiItem.innerHTML = firstConcert;
+                createLiItem.innerHTML = ConcertList;
                 Concertslocation.appendChild(createLiItem);
+                }
             })
 }
     })
@@ -75,11 +85,20 @@ var getArtistReleases = function () {
                 ArtistDiscogFirstAlbum = firstAlbum;
                 console.log("the first album in discog is " + ArtistDiscogFirstAlbum);
 
+               // variable for discography UL location 
+               var discographylocation = document.querySelector("#artist-discography");
+               
+                // clear first set of search li elements
+                discographylocation.innerHTML = "";
+
                 // setting variable for location of UL for discography, creating li element and giving it value, appending
-                var discographylocation = document.querySelector("#artist-discography");
+                
+                for (i=0; i<= 10; i++) {
+                var firstAlbumList = data["release-groups"][i].title;
                 var createLiItem = document.createElement("li");
-                createLiItem.innerHTML = firstAlbum;
+                createLiItem.innerHTML = firstAlbumList;
                 discographylocation.appendChild(createLiItem);
+                }
             })
         }
     })

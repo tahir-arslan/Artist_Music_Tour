@@ -3,7 +3,7 @@ var videoContainer = document.querySelector(".video-container");
 var apiLink = "https://www.googleapis.com/youtube/v3/search?"
 var youtubeKey = "AIzaSyAVipUFCUajMgvasF6xv_p18pu4uLXmhcE"
 var youtubeUrl = 'https://www.youtube.com/watch?v='
-var search = "The offspring"
+var search = "Nirvana"
 console.log(apiLink)
 var url= `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${youtubeKey}&q=${search}&maxResults=3`;
 
@@ -37,3 +37,9 @@ var myFunction = function(){
     })
 }
 // myFunction()
+
+var wikiApi = "https://en.wikipedia.org/w/api.php?action=oprnsearch&q=nirvana&format=json"
+
+fetch (wikiApi).then(function(response){
+    console.log(response)
+})

@@ -12,6 +12,7 @@
       <div>
         <h1>Welcome to Music Tours</h1>
         <h3><p>Your one stop shop for all things concert related.</p></h3>
+
       <!-- </div>
       <div> -->
         <form role="search">
@@ -27,20 +28,32 @@
             </svg>
           </button>
         </form>
+
+      </div>
+      <div>
+        <input
+          id = "input-artist-name"
+          type="text"
+          name="artist-name"
+          placeholder="Enter Artists Name"
+        />
+
       </div>
     </header>
     <main>
         <div id="concert">
-            <div>Concert Listings</div>
+            <div></div>
             <container id="concert-details">
-                Concert Details
+                Upcoming Concert Listings
+                <ul id="concert-listings" class ="list-group"></ul>
             </container>
         </div>
         <div id="artist-bio">
             <div id="artist-header">
                 <img>
-                <div id="artist-name">
+                <div id="artist-name-container">
                     Artist Name
+                    <h2 id="artist-name"></h2>
                 </div>
             </div>
             <div id="biography">
@@ -49,7 +62,8 @@
             </div>
             <div id="discography">
                 <h3>discography</h3>
-                <div id="disocgraphy-content">discography text</div>
+                <div id="disocgraphy-content"></div>
+                <ul id="artist-discography" class="list-group"></ul>
             </div>
         </div>
     </main>
@@ -58,6 +72,7 @@
       <div class="video-container">
       </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

@@ -99,3 +99,7 @@ footer{
 .video-img{
     border-radius: 10%;
 }
+
+#artist_search {
+    z-index: 9999;
+}

@@ -1,11 +1,44 @@
 header{
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    text-align: center;
     border: 1px solid black;
-    margin: 5px;
+    margin: 5px 0 5px 0;
     padding-bottom: 10px;
+}
+
+form {
+    background-color: rgb(222, 219, 219);
+    width: 50%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 10px;
+    margin: 0 auto;
+  }
+
+svg {
+    color: gray;
+    fill: currentColor;
+    width: 80%;
+    padding: 10px;
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+  }
+
+ input {
+    all: unset;
+    color: #fff;
+    width: 100%;
+    padding: 6px 10px;
 }
 
 main{
@@ -55,8 +88,14 @@ footer{
 }
 
 .video-item{
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
     border: 1px solid black;
     margin: 5px;
     padding-bottom: 10px;
 } 
+
+.video-img{
+    border-radius: 10%;
+}

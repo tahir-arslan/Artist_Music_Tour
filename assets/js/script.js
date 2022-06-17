@@ -48,7 +48,8 @@ var myFunction = function(){
 // })
 
 // songkick APi Key
-var songkickAPIKey = "io09K9l3ebJxmxe2"
+var songkickAPIKey = "io09K9l3ebJxmxe2";
+// var BandsInTownAPIKey = "c07ff9edf944dbba92c7932ec1a7ee96";
 
 // variables for document locatiions
 var artistNameInput = document.querySelector("#input-artist-name");
@@ -72,13 +73,33 @@ var ArtistID = "";
 var ArtistDiscogFirstAlbum = "";
 
 
+
+
+
+
+// // function to get artist information from Bandsintown API
+
+// var getArtistIformationBandsInTown = function () {
+//     var apiURL="https://rest.bandsintown.com/artists/" + artistFullName+ "/?app_id=" + BandsInTownAPIKey;
+//     // fetching data and returning in JSON format
+//     fetch(apiURL).then(function(response) {
+//         if (response.ok) {
+//             console.log(response);
+//             response.json().then(function(data){
+//                 console.log(data);
+//                 // console.log("The first event is " + data.resultsPage.results.event[0].displayName)
+
+//             })
+//         }
+//     })
+// }
+
 // function to set data elements in HTML - so far Atist Name
 var setDataToHTML = function() {
     document.getElementById("artist-name").innerHTML = artistFullName;
 
+
 }
-
-
 
 // function to get artist concerts from songkick api 
 var getArtistConcerts = function (){
@@ -109,7 +130,7 @@ var getArtistConcerts = function (){
                 if (Concertlistings > 0){
                      // clearing previous search li elements
                 Concertslocation.innerHTML = "";
-                for (i=0; i <= 10 ; i++) {
+                for (i=0; i < Concertlistings && i <11 ; i++) {
                 ConcertList = data.resultsPage.results.event[i].displayName;
                 var createLiItem = document.createElement("li");
                 createLiItem.innerHTML = ConcertList;
@@ -155,9 +176,11 @@ var getArtistReleases = function () {
                 // clear first set of search li elements
                 discographylocation.innerHTML = "";
 
+                var ArtistAlbums = parseInt(data["release-groups"].length);
+                console.log ("The number of releases is " + ArtistAlbums );
                 // setting variable for location of UL for discography, creating li element and giving it value, appending
                 
-                for (i=0; i<= 10; i++) {
+                for (i=0; i< ArtistAlbums && i<11;  i++) {
                 var firstAlbumList = data["release-groups"][i].title;
                 var albumReleaseDate = data["release-groups"][i]["first-release-date"];
                 var createLiItem = document.createElement("li");

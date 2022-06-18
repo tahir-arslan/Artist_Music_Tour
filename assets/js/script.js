@@ -66,27 +66,6 @@ var ArtistID = "";
 var ArtistDiscogFirstAlbum = "";
 
 
-
-
-
-
-// // function to get artist information from Bandsintown API
-
-// var getArtistIformationBandsInTown = function () {
-//     var apiURL="https://rest.bandsintown.com/artists/" + artistFullName+ "/?app_id=" + BandsInTownAPIKey;
-//     // fetching data and returning in JSON format
-//     fetch(apiURL).then(function(response) {
-//         if (response.ok) {
-//             console.log(response);
-//             response.json().then(function(data){
-//                 console.log(data);
-//                 // console.log("The first event is " + data.resultsPage.results.event[0].displayName)
-
-//             })
-//         }
-//     })
-// }
-
 // function to set data elements in HTML - so far Atist Name
 var setDataToHTML = function() {
     document.getElementById("artist-name").innerHTML = artistFullName;

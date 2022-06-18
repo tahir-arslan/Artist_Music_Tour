@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Concert Listing!</title>
 </head>
 
-<body>
+<body class="scroll-smooth">
     <header class="py-20">
         <div class="p-4 border border-2 border-black rounded-md mx-40 pb-20 color-bg">
             <h1 class="text-5xl font-bold py-10">Welcome to <span class="primary-text-color">Music Tours</span></h1>
@@ -17,7 +20,7 @@
             <!-- </div>
             <div> -->
             <form role="search">
-                <input type="text" name="artist-name" placeholder="Enter Artist Name" size="50%" />
+                <input type="text" id="input-artist-name" name="artist-name" placeholder="Enter Artist Name" size="50%" />
                 <button>
                     <svg viewBox="0 0 1024 1024">
                         <path class="search-icon" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path>
@@ -25,41 +28,51 @@
                 </button>
             </form>
         </div>
-        <div>
-            <input id="input-artist-name" type="text" name="artist-name" placeholder="Enter Artists Name" />
-        </div>
+        <!-- <div>
+            <input class="w-100" id="input-artist-name" type="text" name="artist-name" placeholder="Enter Artists Name" />
+        </div> -->
     </header>
-    <main class="flex flex-auto flex-wrap px-40 py-20 border border-red-400 border-4 rounded-md">
-        <div class="w-2/5 border border-black border-2  mr-6 px-6 py-6 rounded-md" id="concert">
-            <div></div>
-            <container id="concert-details">
-                <h3 class="text-xl font-bold">Upcoming Concert Listings</h3>
-                <ul id="concert-listings" class="list-group"></ul>
-            </container>
-        </div>
-        <div class="w-2/5 border border-black border-2  mr-6 px-6 py-6 rounded-md" id="artist-bio">
-            <div id="artist-header">
+    <main class="grid grid-row-3 justify-items-center pt-20 px-40">
+        <div class="grid" id="pic-name">
+            <div class="bg-cover">
+                <img class="mx-auto w-1/2" src="https://www.billboard.com/wp-content/uploads/media/Rage-Against-The-Machine-1993-portrait-a-billboard-1548.jpg" alt="Cookie Icon SVG">
+            </div>
+            <div class="justify-items-center" id="artist-header">
                 <img>
-                <div id="text-xl font-bold artist-name-container">
+                <h2 class="relative w-1/2 text-center -mt-20 text-4xl font-bold capitalize mx-auto color-bg" id="artist-name"></h2>
+                <!-- <div class="w-1/2 bg-slate-200 text-4xl font-bold" id="artist-name-container">
                     Artist Name
-                    <h2 class="text-xl font-bold" id="artist-name"></h2>
+                </div> -->
+            </div>
+        </div>
+        <!-- <div class="grid grid-flow-row grid-cols-2 grid-rows-1 px-40 py-20">
+        </div> -->
+        <div class="grid grid-cols-2 pt-10 leading-7">
+            <div class="grid-cols-1 shadow-xl mr-6 px-6 py-6 rounded-md grid-cols-1 color-bg" id="concert">
+                <div></div>
+                <container id="concert-details">
+                    <h3 class="text-xl font-bold">Upcoming Concert Listings</h3>
+                    <ul id="concert-listings" class="pl-4 list-group"></ul>
+                </container>
+            </div>
+            <div class="grid-cols-1 shadow-xl mr-6 px-6 py-6 rounded-md grid-cols-1 color-bg" id="artist-bio">
+                <!-- <div id="biography">
+                    <h3 class="text-xl font-bold">Biography</h3>
+                    <div id="biography-content">bio text</div>
+                </div> -->
+                <div id="discography">
+                    <h3 class="text-xl font-bold">Discography</h3>
+                    <div id="disocgraphy-content"></div>
+                    <ul id="artist-discography" class="pl-4 list-group"></ul>
                 </div>
             </div>
-            <div id="biography">
-                <h3 class="text-xl font-bold">Biography</h3>
-                <div id="biography-content">bio text</div>
-            </div>
-            <div id="discography">
-                <h3 class="text-xl font-bold">Discography</h3>
-                <div id="disocgraphy-content"></div>
-                <ul id="artist-discography" class="list-group"></ul>
-            </div>
+        </div>
+        <div class="pt-10 justify-center">
+            <h3 class="text-xl font-bold video-header">Music Videos</h3>
+            <div class="flex flex-wrap video-container"></div>
         </div>
     </main>
     <footer>
-        <h3 class="text-xl font-bold video-header">Music Videos</h3>
-        <div class="flex flex-wrap video-container">
-        </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>

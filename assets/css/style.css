@@ -1,5 +1,9 @@
+* {
+    font-family: 'Mulish', sans-serif;
+}
+
 body {
-    background-color: rgb(43, 45, 70);
+    background-color: rgb(16, 20, 32);
     color: white;
 }
 

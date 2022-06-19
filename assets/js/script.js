@@ -262,16 +262,22 @@ var titleCase = function(str) {
 
 // function to get artist name from input and split and remormat to lasnt name, first name
 var getArtistName = function(event) {
+
+    console.log(event);
+
+    var ArtistNameEntered = artistNameInput.value.trim() || event;
+    artistFullName = ArtistNameEntered;
+
     // if you are submitting a form (prevents page reload)
     event.preventDefault();
-
-    var ArtistNameEntered = artistNameInput.value.trim();
+  
     artistAmazonSearch = ArtistNameEntered;
     //clear the input text
     artistNameInput.value = "";
     
     //transfer the artisti name and add 1st letter in upper case.
     artistFullName = titleCase(ArtistNameEntered);
+
     
     // splitting the artist name entered at the space
     artistNameSplit = artistFullName.split(" ");
@@ -295,9 +301,77 @@ var getArtistName = function(event) {
     //function to set the artist name as search entered
     setArtistName();
 
+    // function to save localStorage using the value within the function
+ 
+    saveArtist(ArtistNameEntered);
+    //loadPreviousArtist(ArtistNameEntered);
+
+}
+
+    // event listener to get artist name input by user in the input text box
+    artistNameInput.addEventListener("change", getArtistName);
+
+    // search history - pulls from local storage using the 'search' button and if it has no value, creates a new blank array
+    var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+    var search_results = document.querySelector("#past-searches");
+    var searchHistoryEl = document.createElement("li");
+
+    // function to save local storage data
+    var saveArtist = function(ArtistNameInput) {
+        
+        //this pushes the value of ... to the searchHistory array
+        searchHistory.push(ArtistNameInput);
+        // verify if it shows the value of searchHistory
+        console.log(searchHistory);
+        // this sets the value of searchHistory to be filled in by the JSON
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+
+        // append new artist to the bottom of the list
+        searchHistoryEl.innerHTML = ArtistNameInput;
+        search_results.appendChild(searchHistoryEl);        
+    }
+
+    // function to load local storage data
+    var loadPreviousArtist = function () {
+        searchHistoryEl = "";
+        // debugger;
+        // function to pull / create the list items on the page if there is data
+        for (i = 0; i < searchHistory.length; i++) {
+            // variables for search results
+            var search_results = document.querySelector("#past-searches");
+            var searchHistoryEl = document.createElement("li");
+            // when clicking on the searchHistoryEl (values from previous), the function reSearch is actioned
+            searchHistoryEl.onclick = reSearch;
+            // setting the value on past-searches
+            searchHistoryEl.setAttribute("id", searchHistory[i]);
+            // populating the values in the html
+            searchHistoryEl.innerHTML = searchHistory[i];
+            search_results.appendChild(searchHistoryEl); 
+            }
+    }
+//location.reload();
+    // function to search by previous search
+    function reSearch(event) {
+        // prevent from refreshing
+       // event.preventDefault();
+        // get value from input element 
+        var setArtistName = event.target.id;
+        
+        // shows if you click on the name what the value is 
+        console.log(setArtistName);
+
+        if (setArtistName) {
+            getArtistName(setArtistName);    
+        }
+    }
+    loadPreviousArtist();
+
+
     //get ticket and album links
     getTicketAndAlbum();
 }
 
 // event listener to get artist name input by user in the input text box
 artistNameInput.addEventListener('change', getArtistName);
+

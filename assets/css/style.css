@@ -23,24 +23,22 @@ form {
   }
 
 svg {
-    color: gray;
+    color: rgb(82, 82, 82);
     fill: currentColor;
-    width: 80%;
-    padding: 10px;
+    width: 20px;
+    padding: 5px;
 }
 
 #artist_search {
     all: unset;
     cursor: pointer;
-    width: 15%;
-    height: auto;
   }
 
 input {
     all: unset;
     color: black;
     width: 100%;
-    padding: 6px 10px;
+    padding: 6px 6px;
 }
 
 

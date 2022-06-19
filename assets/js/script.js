@@ -262,7 +262,7 @@ var titleCase = function(str) {
 
 // function to get artist name from input and split and remormat to lasnt name, first name
 var getArtistName = function(event) {
-
+    
     console.log(event);
 
     var ArtistNameEntered = artistNameInput.value.trim() || event;
@@ -308,8 +308,8 @@ var getArtistName = function(event) {
 
 }
 
-    // event listener to get artist name input by user in the input text box
-    artistNameInput.addEventListener("change", getArtistName);
+    // // event listener to get artist name input by user in the input text box
+    // artistNameInput.addEventListener("change", getArtistName);
 
     // search history - pulls from local storage using the 'search' button and if it has no value, creates a new blank array
     var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
@@ -370,8 +370,8 @@ var getArtistName = function(event) {
 
     //get ticket and album links
     getTicketAndAlbum();
-}
+
 
 // event listener to get artist name input by user in the input text box
-artistNameInput.addEventListener('change', getArtistName);
+artistNameForm.addEventListener('submit', getArtistName);
 

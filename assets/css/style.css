@@ -97,21 +97,11 @@ input {
     padding-bottom: 10px;
 } */
 
-footer {
-    display: flex-row;
-    justify-content: space-between;
-    text-align: center;
-    border: 1px solid black;
-    margin: 5px;
-    padding-bottom: 10px;
-}
-
 .video-container {
     margin: 10px;
     text-align: center;
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
     margin: 5px;
     padding-bottom: 10px;
 }
@@ -123,8 +113,4 @@ footer {
     border: 1px solid black;
     margin: 5px;
     padding-bottom: 10px;
-}
-
-.video-img {
-    border-radius: 10%;
 }

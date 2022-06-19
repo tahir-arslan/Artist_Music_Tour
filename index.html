@@ -14,7 +14,7 @@
 
 <body class="scroll-smooth">
     <header class="py-20">
-        <div class="p-4 border border-2 border-black rounded-md mx-40 pb-20 color-bg">
+        <div class="p-4 border border-2 border-neutral-900 rounded-md mx-40 pb-20 color-bg backdrop-blur-sm">
             <h1 class="text-5xl font-bold py-10">Welcome to <span class="primary-text-color">Music Tours</span></h1>
             <p class="text-2xl pb-10 font-bold">Your one stop shop for all things <span class="secondary-text-color">concert related</span>.</p>
             <!-- </div>
@@ -39,7 +39,7 @@
             </div>
             <div class="justify-items-center" id="artist-header">
                 <img>
-                <h2 class="relative w-1/2 text-center -mt-20 text-4xl font-bold capitalize mx-auto color-bg" id="artist-name"></h2>
+                <h2 class="relative w-1/2 text-center -mt-20 text-4xl font-bold capitalize py-2 mx-auto color-bg" id="artist-name"></h2>
                 <!-- <div class="w-1/2 bg-slate-200 text-4xl font-bold" id="artist-name-container">
                     Artist Name
                 </div> -->
@@ -47,15 +47,15 @@
         </div>
         <!-- <div class="grid grid-flow-row grid-cols-2 grid-rows-1 px-40 py-20">
         </div> -->
-        <div class="grid grid-cols-2 pt-10 leading-7">
-            <div class="grid-cols-1 shadow-xl mr-6 px-6 py-6 rounded-md grid-cols-1 color-bg" id="concert">
+        <div class="grid grid-cols-2 pt-6 leading-7">
+            <div class="grid-cols-1 shadow-xl mr-6 px-6 py-4 rounded-md grid-cols-1 color-bg" id="concert">
                 <div></div>
                 <container id="concert-details">
                     <h3 class="text-xl font-bold">Upcoming Concert Listings</h3>
                     <ul id="concert-listings" class="pl-4 list-group"></ul>
                 </container>
             </div>
-            <div class="grid-cols-1 shadow-xl mr-6 px-6 py-6 rounded-md grid-cols-1 color-bg" id="artist-bio">
+            <div class="grid-cols-1 shadow-xl mr-6 px-6 py-4 rounded-md grid-cols-1 color-bg" id="artist-bio">
                 <!-- <div id="biography">
                     <h3 class="text-xl font-bold">Biography</h3>
                     <div id="biography-content">bio text</div>
@@ -67,12 +67,12 @@
                 </div>
             </div>
         </div>
-        <div class="pt-10 justify-center">
-            <h3 class="text-xl font-bold video-header">Music Videos</h3>
-            <div class="flex flex-wrap video-container"></div>
+        <div class="pt-10 justify-center w-100">
+            <h3 class="text-xl font-bold video-header text-center pb-4">Music Videos</h3>
+            <div class="grid grid-cols-3 gap-6 video-container"></div>
         </div>
     </main>
-    <footer>
+    <footer class="py-10">
     </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>

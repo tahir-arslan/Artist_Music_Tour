@@ -21,7 +21,10 @@ var songkickAPIKey = "io09K9l3ebJxmxe2";
 var videoContainer = document.querySelector(".video-container");
 var youtubeKey = "AIzaSyAVipUFCUajMgvasF6xv_p18pu4uLXmhcE";
 var youtubeUrl = 'https://www.youtube.com/watch?v=';
+var search = "";
+
 var searchVideos = "";
+//console.log(apiLink)
 
 //get 3 videos based on the user's serch
 var getVideos = function(){ //searchVideos
@@ -54,6 +57,69 @@ var getVideos = function(){ //searchVideos
         });
     }
 };
+
+let getTicketButton = document.querySelector("#ticketbtn");
+let getAlbumButton = document.querySelector("#albumbtn");
+let ticketsUrl = "https://www.stubhub.ca/secure/search?q=";
+let enterName = document.querySelector("#userinput")
+let artistFullNameButton = "";
+
+var getSearchPhoto = function() {
+
+    // searchText.addEventListener('change',  getSearchValuePhoto() );
+    enterName.addEventListener('change', (event) => {
+
+        getTicketAndAlbum();
+        
+});
+}
+
+
+function getTicketAndAlbum() {
+    let enterNameValue = enterName.value;
+    console.log(enterNameValue);
+
+    
+
+getTicketButton.addEventListener("click", () =>  {
+    window.open("https://www.stubhub.ca/secure/search?q=" + artistFullNameButton,'_blank');
+getAlbumButton.addEventListener("click", () => {
+    window.open("https://www.sonicboommusic.com/search?type=product&q=NOT+tag%3A__gift+AND+" + artistFullNameButton, "_blank");
+})
+// callback();
+});
+
+}
+getSearchPhoto();
+
+
+
+// songkick APi Key
+var songkickAPIKey = "io09K9l3ebJxmxe2";
+
+
+// variables for document locations the input text field, the artist name locationa nd the discography location
+var artistNameInput = document.querySelector("#input-artist-name");
+var artistNameLocation = document.querySelector("#artist-name");
+var artistDiscographyLocation = document.querySelector("#artist-discography");
+
+// variables used to split name and reconfigure to format last name, first name
+var artistNameSplit = [];
+var ArtistFirstName = "";
+var ArtistLastName = "";
+// this is the appended result to send to the musicbrainz API search in the last name, first name format
+var artistNameSearchCriteria = "";
+
+
+// artist id as brought back from  musicbrainz
+var artistFullID = "";
+
+// global variable for the artist name entered so it can be used in other functions
+var artistFullName = "";
+
+// artist discography variables
+var ArtistDiscogFirstAlbum = "";
+
 
 // function to set data elements in HTML - so far just Artist Name
 var setArtistName = function() {
@@ -214,6 +280,7 @@ var getArtistName = function(event) {
     
     // creating teh musicbrainz required search query format of artist last name, first name
     artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
+    artistFullNameButton = (ArtistFirstName + "%20" + ArtistLastName);
   
     // calling the function to get youtube content and passing it the artist's full name
     getVideos(artistFullName);

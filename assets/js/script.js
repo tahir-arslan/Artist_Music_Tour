@@ -5,6 +5,9 @@ var youtubeUrl = 'https://www.youtube.com/watch?v=';
 var search = "";
 //console.log(apiLink)
 
+
+
+
 //get 3 videos based on the user's serch
 var getVideos = function(search) {
     videoContainer.innerHTML = "";
@@ -24,8 +27,9 @@ var getVideos = function(search) {
                         videoContainer.innerHTML += `
                         <div class="grid-cols-1 flex flex-col h-80 rounded-md color-bg shadow-xl">
                             <a href="${youtubeUrl + video.id.videoId}" class="p-4 video-link" target="_blank"> 
-                            ${video.snippet.title}</a>
+                            ${video.snippet.title}
                             <img class="h-full rounded-b-md bg-cover bg-center" src="${video.snippet.thumbnails.default.url}" />
+                            </a>
                         </div>`
                     };
                 });

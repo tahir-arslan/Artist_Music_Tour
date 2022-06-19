@@ -13,12 +13,11 @@
 </head>
 
 <body class="scroll-smooth">
-    <header class="py-20">
+    <!-- hero/search  -->
+    <header class="w-full bg-fixed bg-bottom bg-cover text-center py-20">
         <div class="p-4 border border-2 border-neutral-900 rounded-md mx-40 pb-20 color-bg backdrop-blur-sm">
             <h1 class="text-5xl font-bold py-10">Welcome to <span class="primary-text-color">Music Tours</span></h1>
             <p class="text-2xl pb-10 font-bold">Your one stop shop for all things <span class="secondary-text-color">concert related</span>.</p>
-            <!-- </div>
-            <div> -->
             <form role="search">
                 <input type="text" id="input-artist-name" name="artist-name" placeholder="Enter Artist Name" size="50%" />
                 <button>
@@ -28,34 +27,27 @@
                 </button>
             </form>
         </div>
-        <!-- <div>
-            <input class="w-100" id="input-artist-name" type="text" name="artist-name" placeholder="Enter Artists Name" />
-        </div> -->
     </header>
-    <main class="grid grid-row-3 justify-items-center pt-20 px-40">
-        <div class="grid" id="pic-name">
+    <main class="grid grid-row-3 justify-items-center pt-20 mx-auto w-1/2">
+        <!-- picture and artist name -->
+        <div class="pt-20" id="pic-name">
             <div class="bg-cover">
-                <img class="mx-auto w-1/2" src="https://www.billboard.com/wp-content/uploads/media/Rage-Against-The-Machine-1993-portrait-a-billboard-1548.jpg" alt="Cookie Icon SVG">
+                <img class="mx-auto w-1/2" src="" alt="">
             </div>
-            <div class="justify-items-center" id="artist-header">
-                <img>
-                <h2 class="relative w-1/2 text-center -mt-20 text-4xl font-bold capitalize py-2 mx-auto color-bg" id="artist-name"></h2>
-                <!-- <div class="w-1/2 bg-slate-200 text-4xl font-bold" id="artist-name-container">
-                    Artist Name
-                </div> -->
+            <div class="rounded-md" id="artist-header">
+                <!-- <img class="h-400 w-400" src="./assets/images/vinyl.png"> -->
+                <h2 class="relative px-w-1/2 text-center -mt-20 text-4xl font-bold capitalize px-4 py-2 color-bg" id="artist-name"></h2>
             </div>
         </div>
-        <!-- <div class="grid grid-flow-row grid-cols-2 grid-rows-1 px-40 py-20">
-        </div> -->
-        <div class="grid grid-cols-2 pt-6 leading-7">
-            <div class="grid-cols-1 shadow-xl mr-6 px-6 py-4 rounded-md grid-cols-1 color-bg" id="concert">
-                <div></div>
+        <!-- concert listing and discography -->
+        <div class="grid grid-cols-2 gap-4 w-100 leading-7">
+            <div class="grid-cols-1 shadow-xl px-6 py-4 rounded-md color-bg" id="concert">
                 <container id="concert-details">
                     <h3 class="text-xl font-bold">Upcoming Concert Listings</h3>
-                    <ul id="concert-listings" class="pl-4 list-group"></ul>
+                    <ul class="pl-4" style="list-style-type:circle" id="concert-listings"></ul>
                 </container>
             </div>
-            <div class="grid-cols-1 shadow-xl mr-6 px-6 py-4 rounded-md grid-cols-1 color-bg" id="artist-bio">
+            <div class="grid-cols-1 shadow-xl mr-6 px-6 py-4 rounded-md color-bg" id="artist-bio">
                 <!-- <div id="biography">
                     <h3 class="text-xl font-bold">Biography</h3>
                     <div id="biography-content">bio text</div>
@@ -63,10 +55,11 @@
                 <div id="discography">
                     <h3 class="text-xl font-bold">Discography</h3>
                     <div id="disocgraphy-content"></div>
-                    <ul id="artist-discography" class="pl-4 list-group"></ul>
+                    <ul class="pl-4 list-group" style="list-style-type:circle" id="artist-discography"></ul>
                 </div>
             </div>
         </div>
+        <!-- music video list -->
         <div class="pt-10 justify-center w-100">
             <h3 class="text-xl font-bold video-header text-center pb-4">Music Videos</h3>
             <div class="grid grid-cols-3 gap-6 video-container"></div>

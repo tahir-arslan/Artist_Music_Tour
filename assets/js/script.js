@@ -23,21 +23,23 @@ var youtubeKey = "AIzaSyAVipUFCUajMgvasF6xv_p18pu4uLXmhcE";
 var youtubeUrl = 'https://www.youtube.com/watch?v=';
 var search = "";
 
-var searchVideos = "";
+var searchVideos = artistFullName;
 //console.log(apiLink)
 
 //get 3 videos based on the user's serch
-var getVideos = function(){ //searchVideos
+var getVideos = function(video){ //searchVideos
     videoContainer.innerHTML = ""; 
+    console.log("this is the " + artistFullName);
     //if no valid input stop the function
-    if(!searchVideos){
-        return
-    }else{
-        var url= `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${youtubeKey}&q=${searchVideos}&maxResults=3`;
+    // if(!searchVideos){
+    //     return
+    // }else{
+        var url= `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${youtubeKey}&q=${artistFullName}&maxResults=3`;
         fetch(url).then(function(response){
             console.log(url)
             console.log(response)
             if(response.ok){
+                console.log(response);
                 response.json().then(function(data){
                     var videos = data.items;
                     //get video name, youtube link and video img. not adding video into the APP yet
@@ -56,27 +58,28 @@ var getVideos = function(){ //searchVideos
             }
         });
     }
-};
+// };
 
 let getTicketButton = document.querySelector("#ticketbtn");
 let getAlbumButton = document.querySelector("#albumbtn");
 let ticketsUrl = "https://www.stubhub.ca/secure/search?q=";
-let enterName = document.querySelector("#userinput")
 let artistFullNameButton = "";
+let artistAmazonSearch = "";
 
-var getSearchPhoto = function() {
 
-    // searchText.addEventListener('change',  getSearchValuePhoto() );
-    enterName.addEventListener('change', (event) => {
+// var getSearchPhoto = function() {
 
-        getTicketAndAlbum();
+//     // searchText.addEventListener('change',  getSearchValuePhoto() );
+//     enterName.addEventListener('change', (event) => {
+
+//         getTicketAndAlbum();
         
-});
-}
+// });
+// }
 
 
 function getTicketAndAlbum() {
-    let enterNameValue = enterName.value;
+    let enterNameValue = artistNameInput.value;
     console.log(enterNameValue);
 
     
@@ -84,13 +87,13 @@ function getTicketAndAlbum() {
 getTicketButton.addEventListener("click", () =>  {
     window.open("https://www.stubhub.ca/secure/search?q=" + artistFullNameButton,'_blank');
 getAlbumButton.addEventListener("click", () => {
-    window.open("https://www.sonicboommusic.com/search?type=product&q=NOT+tag%3A__gift+AND+" + artistFullNameButton, "_blank");
+    window.open("https://www.amazon.ca/s?k=" + artistAmazonSearch + "+albums&crid=98KX0UTYLA8M&sprefix=" + ArtistFirstName + ArtistLastName + "+albums%2Caps%2C93&ref=nb_sb_noss_1" + artistFullNameButton, "_blank");
 })
 // callback();
 });
 
 }
-getSearchPhoto();
+
 
 
 
@@ -263,6 +266,7 @@ var getArtistName = function(event) {
     event.preventDefault();
 
     var ArtistNameEntered = artistNameInput.value.trim();
+    artistAmazonSearch = ArtistNameEntered;
     //clear the input text
     artistNameInput.value = "";
     
@@ -290,7 +294,10 @@ var getArtistName = function(event) {
 
     //function to set the artist name as search entered
     setArtistName();
+
+    //get ticket and album links
+    getTicketAndAlbum();
 }
 
 // event listener to get artist name input by user in the input text box
-artistNameForm.addEventListener('submit', getArtistName);
+artistNameInput.addEventListener('change', getArtistName);

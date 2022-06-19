@@ -201,8 +201,10 @@ var getArtistInformation = function () {
 }
 
 // function to get artist name from input and split and remormat to lasnt name, first name
-var getArtistName = function() {
-    var ArtistNameEntered = artistNameInput.value.trim();
+var getArtistName = function(event) {
+    console.log(event);
+
+    var ArtistNameEntered = artistNameInput.value.trim() || event;
     artistFullName = ArtistNameEntered;
     
     // splitting the artist name entered at the space
@@ -287,10 +289,8 @@ var getArtistName = function() {
         // shows if you click on the name what the value is 
         console.log(setArtistName);
 
-        // if (setArtistName) {
-        //     getArtistName(setArtistName);
-        //     // clear old content
-            
-        // }
+        if (setArtistName) {
+            getArtistName(setArtistName);    
+        }
     }
     loadPreviousArtist();

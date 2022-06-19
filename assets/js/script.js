@@ -4,6 +4,7 @@ var apiLink = "https://www.googleapis.com/youtube/v3/search?";
 var youtubeKey = "AIzaSyAVipUFCUajMgvasF6xv_p18pu4uLXmhcE";
 var youtubeUrl = 'https://www.youtube.com/watch?v=';
 var search = "";
+
 //console.log(apiLink)
 
 //get 3 videos based on the user's serch
@@ -38,6 +39,41 @@ var getVideos = function(search){
         });
     }
 };
+
+let getTicketButton = document.querySelector("#ticketbtn");
+let getAlbumButton = document.querySelector("#albumbtn");
+let ticketsUrl = "https://www.stubhub.ca/secure/search?q=";
+let enterName = document.querySelector("#userinput")
+let artistFullNameButton = "";
+
+var getSearchPhoto = function() {
+
+    // searchText.addEventListener('change',  getSearchValuePhoto() );
+    enterName.addEventListener('change', (event) => {
+
+        getTicketAndAlbum();
+        
+});
+}
+
+
+function getTicketAndAlbum() {
+    let enterNameValue = enterName.value;
+    console.log(enterNameValue);
+
+    
+
+getTicketButton.addEventListener("click", () =>  {
+    window.open("https://www.stubhub.ca/secure/search?q=" + artistFullNameButton,'_blank');
+getAlbumButton.addEventListener("click", () => {
+    window.open("https://www.sonicboommusic.com/search?type=product&q=NOT+tag%3A__gift+AND+" + artistFullNameButton, "_blank");
+})
+// callback();
+});
+
+}
+getSearchPhoto();
+
 
 
 // songkick APi Key
@@ -216,6 +252,7 @@ var getArtistName = function() {
     
     // creating teh musicbrainz required search query format of artist last name, first name
     artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
+    artistFullNameButton = (ArtistFirstName + "%20" + ArtistLastName);
   
     // calling the function to get youtube content and passing it the artist's full name
    getVideos(artistFullName);

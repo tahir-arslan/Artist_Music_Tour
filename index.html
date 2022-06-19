@@ -13,11 +13,9 @@
         <h1>Welcome to Music Tours</h1>
         <h3><p>Your one stop shop for all things concert related.</p></h3>
 
-      <!-- </div>
-      <div> -->
-        <form role="search">
+        <form id="artist-name-form" role="search">
           <input
-            type="text"
+            type="search"
             name="artist-name"
             id = "input-artist-name"
             placeholder="Enter Artists Name"
@@ -36,52 +34,49 @@
     <main>
 
         <div class="flex_container">
-        <div id="concert">
-            <div></div>
-            <container id="concert-details">
-                Upcoming Concert Listings
-                <ul id="concert-listings" class ="list-group"></ul>
-            </container>
+          <div id="concert">
+              <container id="concert-details">
+                  Upcoming Concert Listings
+                  <ul id="concert-listings" class ="list-group"></ul>
+              </container>
+          </div>
+          <div class="section_container" id="artist-bio">
+              <div id="artist-header">
+                  <img>
+                  <div id="artist-name-container">
+                      Artist Name
+                      <h2 id="artist-name"></h2>
+                  </div>
+              </div>
+              <div class="section_container" id="discography">
+                  <h3>Discography</h3>
+                  <div id="disocgraphy-content"></div>
+                  <ul id="artist-discography" class="list-group"></ul>
+              </div>
+          </div>
         </div>
-        <div class="section_container" id="artist-bio">
-            <div id="artist-header">
-                <img>
-                <div id="artist-name-container">
-                    Artist Name
-                    <h2 id="artist-name"></h2>
-                </div>
-            </div>
-            <div class="section_container" id="discography">
-                <h3>discography</h3>
-                <div id="disocgraphy-content"></div>
-                <ul id="artist-discography" class="list-group"></ul>
-            </div>
+        <div class="button_searches">
+            <button> Buy Tickets</button>
+            <button>Buy Albums</button>
         </div>
-
-         </div>
-         <div class="button_searches">
-             <button> Buy Tickets</button>
-             <button>Buy Albums</button>
-         </div>
-   
-            
-           
+         
     </main>
+
     <section>
         <div>
             <h3 class="video-header">Music Videos</h3>
             <div class="video-container">
             </div>
         </div>
-
     </section>
+
     <footer>
         <div>
-        <h4> search history</h4>
+          <h4>Search History</h4>
         <div>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
-

@@ -1,19 +1,36 @@
-
+// variables for document locations the input text field, the artist name locationa nd the discography location
+var artistNameForm = document.querySelector("#artist-name-form");
+var artistNameInput = document.querySelector("#input-artist-name");
+var artistNameLocation = document.querySelector("#artist-name");
+var artistDiscographyLocation = document.querySelector("#artist-discography");
+// variables used to split name and reconfigure to format last name, first name
+var artistNameSplit = [];
+var ArtistFirstName = "";
+var ArtistLastName = "";
+// this is the appended result to send to the musicbrainz API search in the last name, first name format
+var artistNameSearchCriteria = "";
+// artist id as brought back from  musicbrainz
+var artistFullID = "";
+// global variable for the artist name entered so it can be used in other functions
+var artistFullName = "";
+// artist discography variables
+var ArtistDiscogFirstAlbum = "";
+// songkick APi Key
+var songkickAPIKey = "io09K9l3ebJxmxe2";
+//video variables
 var videoContainer = document.querySelector(".video-container");
-var apiLink = "https://www.googleapis.com/youtube/v3/search?";
 var youtubeKey = "AIzaSyAVipUFCUajMgvasF6xv_p18pu4uLXmhcE";
 var youtubeUrl = 'https://www.youtube.com/watch?v=';
-var search = "";
-//console.log(apiLink)
+var searchVideos = "";
 
 //get 3 videos based on the user's serch
-var getVideos = function(search){
+var getVideos = function(){ //searchVideos
     videoContainer.innerHTML = ""; 
-    //if no entree on the user's input stop the function
-    if(!search){
+    //if no valid input stop the function
+    if(!searchVideos){
         return
     }else{
-        var url= `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${youtubeKey}&q=${search}&maxResults=3`;
+        var url= `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${youtubeKey}&q=${searchVideos}&maxResults=3`;
         fetch(url).then(function(response){
             console.log(url)
             console.log(response)
@@ -29,49 +46,18 @@ var getVideos = function(search){
                             <img class="video-img" src="${video.snippet.thumbnails.default.url}" />
                         </div>`
                     };
-                });
-                
+                });   
             }
             else{
-                console.log("error")
+                console.log("No Fetch Response")
             }
         });
     }
 };
 
-
-// songkick APi Key
-var songkickAPIKey = "io09K9l3ebJxmxe2";
-
-
-// variables for document locations the input text field, the artist name locationa nd the discography location
-var artistNameInput = document.querySelector("#input-artist-name");
-var artistNameLocation = document.querySelector("#artist-name");
-var artistDiscographyLocation = document.querySelector("#artist-discography");
-
-// variables used to split name and reconfigure to format last name, first name
-var artistNameSplit = [];
-var ArtistFirstName = "";
-var ArtistLastName = "";
-// this is the appended result to send to the musicbrainz API search in the last name, first name format
-var artistNameSearchCriteria = "";
-
-
-// artist id as brought back from  musicbrainz
-var artistFullID = "";
-
-// global variable for the artist name entered so it can be used in other functions
-var artistFullName = "";
-
-// artist discography variables
-var ArtistDiscogFirstAlbum = "";
-
-
 // function to set data elements in HTML - so far just Artist Name
 var setArtistName = function() {
     document.getElementById("artist-name").innerHTML = artistFullName;
-
-
 }
 
 // function to get artist concerts from songkick api using the Artist ID obtained from musicbrainz
@@ -120,10 +106,10 @@ var getArtistConcerts = function (){
                     Concertslocation.appendChild(createLiItemNone);
 
                 }
-            })
-            }
-})
-    }
+            });
+        }
+    });
+}
 
 
 // function to get artist releases and set them as <li> DOM elements in the discography section
@@ -139,14 +125,13 @@ var getArtistReleases = function () {
                 console.log(data);
 
                 // The first album in discography is set here for testing purposes 
-                var firstAlbum = data["release-groups"][0].title;
-               
+                var firstAlbum = data["release-groups"][0].title;              
                 
                 ArtistDiscogFirstAlbum = firstAlbum;
                 console.log("the first album in discog is " + ArtistDiscogFirstAlbum);
 
-               // variable for discography UL location  so <li> elements can be appended there
-               var discographylocation = document.querySelector("#artist-discography");
+                // variable for discography UL location  so <li> elements can be appended there
+                var discographylocation = document.querySelector("#artist-discography");
                
                 // clearing any <li> elements from previous search 
                 discographylocation.innerHTML = "";
@@ -166,8 +151,7 @@ var getArtistReleases = function () {
                 }
             })
         }
-    })
-   
+    });
     // function to call out and get artist concerts
     getArtistConcerts();
 }
@@ -176,34 +160,48 @@ var getArtistReleases = function () {
 // function to get artist information - mostly to grab ID so we can send it to get discography
 var getArtistInformation = function () {
     // varible for URL that includes artist name in new format last name, first name and asking for JSON format
- var apiURL = "https://musicbrainz.org/ws/2/artist/?query=artist:" + artistNameSearchCriteria +"%20AND%20&fmt=json";
-    
-   
+    var apiURL = "https://musicbrainz.org/ws/2/artist/?query=artist:" + artistNameSearchCriteria +"%20AND%20&fmt=json";
 
- // fetching data and JSON the data
- fetch(apiURL).then(function(response) {
-     if (response.ok) {
-    console.log(response);
-    response.json().then(function(data){
-        console.log(data);
+    // fetching data and JSON the data
+    fetch(apiURL).then(function(response) {
+        if (response.ok) {
+            console.log(response);
+            response.json().then(function(data){
+                console.log(data);
 
-        // setting id for artist name so we can pass it through the  get discopgraphy releases function
-        var artistID = data.artists[0].id;
-        console.log(artistID);
-        artistFullID = artistID;
+                // setting id for artist name so we can pass it through the  get discopgraphy releases function
+                var artistID = data.artists[0].id;
+                console.log(artistID);
+                artistFullID = artistID;
 
-        // calling function to get artist discography releases from musicbrainz API
-        getArtistReleases();
+                // calling function to get artist discography releases from musicbrainz API
+                getArtistReleases();
+            });
+        }
+    });
+};
 
- });
-}
- });
-}
+//1st Artist letter in Upper case
+var titleCase = function(str) {
+    //split the words within the string
+    var array = str.toLowerCase().split(" ");
+    var result = array.map(function(val){
+        return val.replace(val.charAt(0), val.charAt(0).toUpperCase());
+    });
+    return result.join(" ");
+};
 
 // function to get artist name from input and split and remormat to lasnt name, first name
-var getArtistName = function() {
+var getArtistName = function(event) {
+    // if you are submitting a form (prevents page reload)
+    event.preventDefault();
+
     var ArtistNameEntered = artistNameInput.value.trim();
-    artistFullName = ArtistNameEntered;
+    //clear the input text
+    artistNameInput.value = "";
+    
+    //transfer the artisti name and add 1st letter in upper case.
+    artistFullName = titleCase(ArtistNameEntered);
     
     // splitting the artist name entered at the space
     artistNameSplit = artistFullName.split(" ");
@@ -218,8 +216,7 @@ var getArtistName = function() {
     artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
   
     // calling the function to get youtube content and passing it the artist's full name
-   getVideos(artistFullName);
-
+    getVideos(artistFullName);
 
     // calling the function to call teh musicbrainz api to get artist ID and info
     getArtistInformation();
@@ -228,7 +225,5 @@ var getArtistName = function() {
     setArtistName();
 }
 
-
-
-    // event listener to get artist name input by user in the input text box
-    artistNameInput.addEventListener("change", getArtistName);
+// event listener to get artist name input by user in the input text box
+artistNameForm.addEventListener('submit', getArtistName);

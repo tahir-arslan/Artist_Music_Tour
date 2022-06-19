@@ -25,7 +25,7 @@ var getVideos = function(search) {
                     //get video name, youtube link and video img. not adding video into the APP yet
                     for (video of videos) {
                         videoContainer.innerHTML += `
-                        <div class="grid-cols-1 flex flex-col h-80 rounded-md color-bg shadow-xl">
+                        <div class="grid-cols-1 flex flex-col h-80 rounded-md color-bg shadow-xl text-sm md:text-md">
                             <a href="${youtubeUrl + video.id.videoId}" class="p-4 video-link" target="_blank"> 
                             ${video.snippet.title}
                             <img class="h-full rounded-b-md bg-cover bg-center" src="${video.snippet.thumbnails.default.url}" />

@@ -9,6 +9,8 @@ header{
     padding-bottom: 10px;
 }
 
+
+/* input style */
 form {
     background-color: rgb(222, 219, 219);
     width: 50%;
@@ -27,20 +29,22 @@ svg {
     padding: 10px;
 }
 
-button {
+#artist_search {
     all: unset;
     cursor: pointer;
-    width: 44px;
-    height: 44px;
+    width: 15%;
+    height: auto;
   }
 
- input {
+input {
     all: unset;
-    color: #fff;
+    color: black;
     width: 100%;
     padding: 6px 10px;
 }
 
+
+/* main style */
 main{
     display: flex-row;
     justify-content: space-around;
@@ -103,10 +107,6 @@ section {
 .video-img{
     border-radius: 10%;
 }
-
-/* #artist_search {
-    z-index: 9999;
-} */
 
 footer {
     display: flex-row;

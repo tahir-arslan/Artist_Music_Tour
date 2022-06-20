@@ -23,6 +23,9 @@ header {
     background-color: rgba(43, 45, 70, 0.486);
 }
 
+
+/* input style */
+
 form {
     background-color: rgb(222, 219, 219);
     width: 50%;
@@ -30,49 +33,26 @@ form {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 0 10px;
+    padding: 0 5px;
     margin: 0 auto;
 }
 
 svg {
-    color: gray;
+    color: rgb(82, 82, 82);
     fill: currentColor;
-    width: 80%;
-    padding: 10px;
+    width: 30px;
+    padding: 5px;
+    margin-left: 14px;
 }
 
-button {
+#artist_search {
     all: unset;
     cursor: pointer;
-    width: 44px;
-    height: 44px;
 }
 
 input {
     all: unset;
-    color: #fff;
+    color: black;
     width: 100%;
-    padding: 6px 10px;
+    padding: 6px 6px;
 }
-
-
-/* .video-container {
-    margin: 10px;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    margin: 5px;
-    padding-bottom: 10px;
-}
-
-.video-item {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    border: 1px solid black;
-    margin: 5px;
-    padding-bottom: 10px;
-} */
-
-
-/* after this */

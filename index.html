@@ -13,71 +13,70 @@
 </head>
 
 <body class="scroll-smooth">
-    <!-- hero/search  -->
+    <!-- hero picture  -->
     <header class="w-full bg-fixed bg-top md:bg-bottom bg-cover text-center py-4 sm:py-10 md:py-20">
-        <!-- container -->
+        <!-- welcome container -->
         <div class="border border-2 border-neutral-900 rounded-md color-bg backdrop-blur-sm mx-2 sm:mx-10 md:mx-20 lg:mx-40 py-2 sm:py-4 md:py-6 lg:py-10">
-            <!-- text -->
             <h1 class="text-2xl md:text-3xl lg:text-5xl font-bold ">Welcome to <span class="primary-text-color ">Music Tours</span></h1>
             <p class="font-bold text-sm md:text-lg lg:text-2xl py-2 sm:py-4 md:py-6 lg:py-10 ">Your one stop shop for all things <span class="secondary-text-color ">concert related</span>.</p>
+            <!-- search bar -->
             <form id="artist-name-form" role="search">
-                <input type="search" id="input-artist-name" name="artist-name" placeholder="Enter Artist Name" size="50%" />
+                <input id="input-artist-name" type="search" name="artist-name" placeholder="Enter Artists Name" size="50%" />
                 <button id="artist_search">
-                    <svg viewBox="0 0 1024 1024">
-                        <path class="search-icon" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path>
-                    </svg>
-                </button>
+                            <svg viewBox="0 0 1024 1024">
+                            <path class="search-icon" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path>
+                            </svg>
+                    </button>
             </form>
         </div>
     </header>
+    <!-- main content set to 3 rows -->
     <main class="grid grid-row-3 justify-items-center py-4 sm:py-10 md:py-20 mx-2 sm:mx-10 md:mx-20 lg:mx-40">
-        <!-- picture and artist name -->
-        <div class="pt-20" id="artist-header">
-            <div class="bg-cover">
-                <img class="mx-auto w-1/2" src="" alt="">
-            </div>
+        <!-- 1st row:  picture and artist name -->
+        <div id="artist-header">
+            <img src="./assets/images/vinyl.png" alt="----------Placeholder Image, DELETE AFTER-------------">
             <div class="rounded-md" id="artist-name-container">
-                <!-- <img class="h-400 w-400" src="./assets/images/vinyl.png"> -->
-                <h2 class="relative px-w-1/2 text-center -mt-20 text-xl md:text-2xl lg:text-4xl font-bold capitalize px-4 py-2 color-bg" id="artist-name"></h2>
+                <h2 class="relative px-w-1/2 text-center text-xl md:text-2xl lg:text-4xl font-bold capitalize px-4 py-2 color-bg" id="artist-name"></h2>
             </div>
         </div>
-        <!-- concert listing and discography -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-100 leading-6 md:leading-7 text-sm md:text-md " id="artist-bio ">
-            <div class="grid-cols-1 shadow-xl px-6 py-4 rounded-md color-bg " id="concert ">
-                <container id="concert-details ">
-                    <h3 class="font-bold text-lg md:text-xl ">Upcoming Concert(s)</h3>
-                    <ul class="pl-4 " style="list-style-type:circle " id="concert-listings "></ul>
-                </container>
-                <button class="rounded-md" id="ticketbtn"> Buy Tickets</button>
-            </div>
-            <div class="grid-cols-1 shadow-xl px-6 py-4 rounded-md color-bg " id="artist-bio ">
-                <!-- <div id="biography ">
-                    <h3 class="text-xl font-bold ">Biography</h3>
-                    <div id="biography-content ">bio text</div>
-                </div> -->
-                <div id="discography ">
-                    <h3 class="font-bold text-lg md:text-xl ">Discography</h3>
-                    <div id="disocgraphy-content "></div>
-                    <ul class="pl-4 " style="list-style-type:circle " id="artist-discography "></ul>
+        <!-- 2nd row: concert listing and discography (1 column for small screen, 2 columns for medium screens and up) -->
+        <div id="artist-bio" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-100 py-4 sm:py-10 md:py-20 leading-6 md:leading-7 text-sm md:text-md">
+            <div id="concert" class="grid-cols-1 flex flex-col shadow-xl color-bg rounded-md">
+                <div class="bg-rose-800 text-center p-2 rounded-t-md">
+                    <h3 class="font-bold text-lg md:text-2xl">Upcoming Concert(s)</h3>
                 </div>
-                <button class="rounded-md" id="albumbtn">Buy Albums</button>
+                <div id="concert-details" class="px-6 py-4 rounded-md">
+                    <ul id="concert-listings" class="pl-4 text-md md:text-lg lg:text-xl" style="list-style-type:circle"></ul>
+                </div>
+                <button id="ticketbtn" class="rounded-md mt-auto m-4 bg-rose-800 p-2"> Buy Tickets</button>
+            </div>
+            <div class="grid-cols-1 flex flex-col shadow-xl color-bg rounded-md">
+                <div class="bg-rose-800 text-center p-2 rounded-t-md">
+                    <h3 class="font-bold text-lg md:text-2xl">Discography</h3>
+                </div>
+                <div id="discography" class="px-6 py-4 rounded-md">
+                    <ul id="artist-discography" class="pl-4 text-md md:text-lg lg:text-xl" style="list-style-type:circle"></ul>
+                </div>
+                <button id="albumbtn" class="rounded-md mt-auto m-4 bg-rose-800 p-2">Buy Albums</button>
             </div>
         </div>
-        <!-- music video list -->
-        <div class="pt-10 justify-center w-100 ">
-            <h3 class="text-xl font-bold text-center pb-4 video-header ">Music Videos</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 video-container ">
-            </div>
+        <!-- 3rd row: music video list (1 column for small screens, 3 columns for larger screens)-->
+        <div class="justify-center w-100">
+            <h3 class="text-lg md:text-2xl font-bold text-center bg-rose-800 rounded-md px-10 py-2 video-header">Music Videos</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6 video-container"></div>
         </div>
     </main>
-    <footer class="py-4 sm:py-10 md:py-20 mx-2 sm:mx-10 md:mx-20 lg:mx-40">
-        <div id="">
+    <!-- search history -->
+    <footer class="bg-rose-900">
+        <div id="past-searches" class="py-4 sm:py-10 md:py-20 mx-2 sm:mx-10 md:mx-20 lg:mx-40">
             <h4>Search History</h4>
             <div>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js "></script>
     <script src="https://cdn.tailwindcss.com "></script>
     <script src="./assets/js/script.js "></script>
+
 </body>
 
 </html>

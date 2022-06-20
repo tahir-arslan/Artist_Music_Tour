@@ -27,38 +27,38 @@ var searchVideos = artistFullName;
 //console.log(apiLink)
 
 //get 3 videos based on the user's serch
-var getVideos = function(video){ //searchVideos
-    videoContainer.innerHTML = ""; 
-    console.log("this is the " + artistFullName);
-    //if no valid input stop the function
-    // if(!searchVideos){
-    //     return
-    // }else{
-        var url= `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${youtubeKey}&q=${artistFullName}&maxResults=3`;
-        fetch(url).then(function(response){
+var getVideos = function(video) { //searchVideos
+        videoContainer.innerHTML = "";
+        console.log("this is the " + artistFullName);
+        //if no valid input stop the function
+        // if(!searchVideos){
+        //     return
+        // }else{
+        var url = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${youtubeKey}&q=${artistFullName}&maxResults=3`;
+        fetch(url).then(function(response) {
             console.log(url)
             console.log(response)
-            if(response.ok){
+            if (response.ok) {
                 console.log(response);
-                response.json().then(function(data){
+                response.json().then(function(data) {
                     var videos = data.items;
                     //get video name, youtube link and video img. not adding video into the APP yet
-                    for(video of videos){
+                    for (video of videos) {
                         videoContainer.innerHTML += `
-                        <div class="video-item">
-                            <a href="${youtubeUrl + video.id.videoId}" class="video-link" target="_blank"> 
-                            ${video.snippet.title}</a>
-                            <img class="video-img" src="${video.snippet.thumbnails.default.url}" />
+                        <div class="grid-cols-1 h-auto rounded-md color-bg shadow-xl">
+                            <a href="${youtubeUrl + video.id.videoId}" class="video-link" target="_blank">
+                            <img class="w-full rounded-t-md bg-cover bg-center" src="${video.snippet.thumbnails.default.url}" />
+                            <p class="p-2">${video.snippet.title}</p>
+                            </a>
                         </div>`
                     };
-                });   
-            }
-            else{
+                });
+            } else {
                 console.log("No Fetch Response")
             }
         });
     }
-// };
+    // };
 
 let getTicketButton = document.querySelector("#ticketbtn");
 let getAlbumButton = document.querySelector("#albumbtn");
@@ -73,7 +73,7 @@ let artistAmazonSearch = "";
 //     enterName.addEventListener('change', (event) => {
 
 //         getTicketAndAlbum();
-        
+
 // });
 // }
 
@@ -82,15 +82,15 @@ function getTicketAndAlbum() {
     let enterNameValue = artistNameInput.value;
     console.log(enterNameValue);
 
-    
 
-getTicketButton.addEventListener("click", () =>  {
-    window.open("https://www.stubhub.ca/secure/search?q=" + artistFullNameButton,'_blank');
-getAlbumButton.addEventListener("click", () => {
-    window.open("https://www.amazon.ca/s?k=" + artistAmazonSearch + "+albums&crid=98KX0UTYLA8M&sprefix=" + ArtistFirstName + ArtistLastName + "+albums%2Caps%2C93&ref=nb_sb_noss_1" + artistFullNameButton, "_blank");
-})
-// callback();
-});
+
+    getTicketButton.addEventListener("click", () => {
+        window.open("https://www.stubhub.ca/secure/search?q=" + artistFullNameButton, '_blank');
+        getAlbumButton.addEventListener("click", () => {
+                window.open("https://www.amazon.ca/s?k=" + artistAmazonSearch + "+albums&crid=98KX0UTYLA8M&sprefix=" + ArtistFirstName + ArtistLastName + "+albums%2Caps%2C93&ref=nb_sb_noss_1" + artistFullNameButton, "_blank");
+            })
+            // callback();
+    });
 
 }
 
@@ -130,14 +130,14 @@ var setArtistName = function() {
 }
 
 // function to get artist concerts from songkick api using the Artist ID obtained from musicbrainz
-var getArtistConcerts = function (){
-    var apiURL = "https://api.songkick.com/api/3.0/artists/mbid:"+ artistFullID + "/calendar.json?apikey=" + songkickAPIKey;
+var getArtistConcerts = function() {
+    var apiURL = "https://api.songkick.com/api/3.0/artists/mbid:" + artistFullID + "/calendar.json?apikey=" + songkickAPIKey;
 
     // fethcing data and returning in JSON format
     fetch(apiURL).then(function(response) {
         if (response.ok) {
             console.log(response);
-            response.json().then(function(data){
+            response.json().then(function(data) {
                 console.log(data);
 
                 // variable for concerts location on page to append <li> elements
@@ -147,26 +147,26 @@ var getArtistConcerts = function (){
                 var Concertlistings = parseInt(data.resultsPage.totalEntries);
 
                 // if there are concert listings, clearing previous search results and adding new ones
-                if (Concertlistings > 0){
+                if (Concertlistings > 0) {
                     // clearing previous search li elements
                     Concertslocation.innerHTML = "";
 
                     // for loop to cycle through concert listings until the array length or 10 items is reached
-                    for (i=0; i < Concertlistings && i <11 ; i++) {
+                    for (i = 0; i < Concertlistings && i < 11; i++) {
 
-                    // displaying the results returned from API
-                    ConcertList = data.resultsPage.results.event[i].displayName;
+                        // displaying the results returned from API
+                        ConcertList = data.resultsPage.results.event[i].displayName;
 
-                    // creating <li> elements and appending them to concerts location on page
-                    var createLiItem = document.createElement("li");
-                    createLiItem.innerHTML = ConcertList;
-                    Concertslocation.appendChild(createLiItem);
-                    } 
+                        // creating <li> elements and appending them to concerts location on page
+                        var createLiItem = document.createElement("li");
+                        createLiItem.innerHTML = ConcertList;
+                        Concertslocation.appendChild(createLiItem);
+                    }
                     // error control for if there are no concert listings returned from API
                     // adding a message to the concert listings portion of the page
-                }    else if (Concertlistings === 0) {
-    
-                     // clearing previous search li elements
+                } else if (Concertlistings === 0) {
+
+                    // clearing previous search li elements
                     Concertslocation.innerHTML = "";
 
                     // creating new <li> element with message that there are no concerts to display
@@ -182,41 +182,41 @@ var getArtistConcerts = function (){
 
 
 // function to get artist releases and set them as <li> DOM elements in the discography section
-var getArtistReleases = function () {
+var getArtistReleases = function() {
     // api url includes artistfullID variable and search for albums and return JSON format
     var apiURL = "https://musicbrainz.org/ws/2/release-group?artist=" + artistFullID + "&type=album&!secondary-types&fmt=json";
-    
+
     // fetching data and returning response in JSON format
     fetch(apiURL).then(function(response) {
         if (response.ok) {
             console.log(response);
-            response.json().then(function(data){
+            response.json().then(function(data) {
                 console.log(data);
 
                 // The first album in discography is set here for testing purposes 
-                var firstAlbum = data["release-groups"][0].title;              
-                
+                var firstAlbum = data["release-groups"][0].title;
+
                 ArtistDiscogFirstAlbum = firstAlbum;
                 console.log("the first album in discog is " + ArtistDiscogFirstAlbum);
 
                 // variable for discography UL location  so <li> elements can be appended there
                 var discographylocation = document.querySelector("#artist-discography");
-               
+
                 // clearing any <li> elements from previous search 
                 discographylocation.innerHTML = "";
 
                 // parsing the length of the array so that we can use it in the for loop
                 var ArtistAlbums = parseInt(data["release-groups"].length);
- 
+
                 // for loop which will cycle through the array until it meets 10 or the length of the array
                 // then setting the album title and the album release date
-                for (i=0; i< ArtistAlbums && i<11;  i++) {
-                var firstAlbumList = data["release-groups"][i].title;
-                var albumReleaseDate = data["release-groups"][i]["first-release-date"];
-                // creating <li> elements here and appending them to the discography location on page
-                var createLiItem = document.createElement("li");
-                createLiItem.innerHTML = firstAlbumList + "(" + albumReleaseDate + ")";
-                discographylocation.appendChild(createLiItem);
+                for (i = 0; i < ArtistAlbums && i < 11; i++) {
+                    var firstAlbumList = data["release-groups"][i].title;
+                    var albumReleaseDate = data["release-groups"][i]["first-release-date"];
+                    // creating <li> elements here and appending them to the discography location on page
+                    var createLiItem = document.createElement("li");
+                    createLiItem.innerHTML = firstAlbumList + "(" + albumReleaseDate + ")";
+                    discographylocation.appendChild(createLiItem);
                 }
             })
         }
@@ -227,15 +227,15 @@ var getArtistReleases = function () {
 
 
 // function to get artist information - mostly to grab ID so we can send it to get discography
-var getArtistInformation = function () {
+var getArtistInformation = function() {
     // varible for URL that includes artist name in new format last name, first name and asking for JSON format
-    var apiURL = "https://musicbrainz.org/ws/2/artist/?query=artist:" + artistNameSearchCriteria +"%20AND%20&fmt=json";
+    var apiURL = "https://musicbrainz.org/ws/2/artist/?query=artist:" + artistNameSearchCriteria + "%20AND%20&fmt=json";
 
     // fetching data and JSON the data
     fetch(apiURL).then(function(response) {
         if (response.ok) {
             console.log(response);
-            response.json().then(function(data){
+            response.json().then(function(data) {
                 console.log(data);
 
                 // setting id for artist name so we can pass it through the  get discopgraphy releases function
@@ -254,7 +254,7 @@ var getArtistInformation = function () {
 var titleCase = function(str) {
     //split the words within the string
     var array = str.toLowerCase().split(" ");
-    var result = array.map(function(val){
+    var result = array.map(function(val) {
         return val.replace(val.charAt(0), val.charAt(0).toUpperCase());
     });
     return result.join(" ");
@@ -262,7 +262,7 @@ var titleCase = function(str) {
 
 // function to get artist name from input and split and remormat to lasnt name, first name
 var getArtistName = function(event) {
-    
+
     console.log(event);
 
     var ArtistNameEntered = artistNameInput.value.trim() || event;
@@ -270,28 +270,28 @@ var getArtistName = function(event) {
 
     // if you are submitting a form (prevents page reload)
     event.preventDefault();
-  
+
     artistAmazonSearch = ArtistNameEntered;
     //clear the input text
     artistNameInput.value = "";
-    
+
     //transfer the artisti name and add 1st letter in upper case.
     artistFullName = titleCase(ArtistNameEntered);
 
-    
+
     // splitting the artist name entered at the space
     artistNameSplit = artistFullName.split(" ");
-   
+
     //setting the first name of the artist search 
     ArtistFirstName = artistNameSplit[0];
 
     // setting the last name of the artist search
     ArtistLastName = artistNameSplit[1];
-    
+
     // creating teh musicbrainz required search query format of artist last name, first name
     artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
     artistFullNameButton = (ArtistFirstName + "%20" + ArtistLastName);
-  
+
     // calling the function to get youtube content and passing it the artist's full name
     getVideos(artistFullName);
 
@@ -302,38 +302,38 @@ var getArtistName = function(event) {
     setArtistName();
 
     // function to save localStorage using the value within the function
- 
+
     saveArtist(ArtistNameEntered);
     //loadPreviousArtist(ArtistNameEntered);
 
 }
 
-    // // event listener to get artist name input by user in the input text box
-    // artistNameInput.addEventListener("change", getArtistName);
+// // event listener to get artist name input by user in the input text box
+// artistNameInput.addEventListener("change", getArtistName);
 
-    // search history - pulls from local storage using the 'search' button and if it has no value, creates a new blank array
-    var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+// search history - pulls from local storage using the 'search' button and if it has no value, creates a new blank array
+var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
-    var search_results = document.querySelector("#past-searches");
-    var searchHistoryEl = document.createElement("li");
+var search_results = document.querySelector("#past-searches");
+var searchHistoryEl = document.createElement("li");
 
-    // function to save local storage data
-    var saveArtist = function(ArtistNameInput) {
-        
-        //this pushes the value of ... to the searchHistory array
-        searchHistory.push(ArtistNameInput);
-        // verify if it shows the value of searchHistory
-        console.log(searchHistory);
-        // this sets the value of searchHistory to be filled in by the JSON
-        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+// function to save local storage data
+var saveArtist = function(ArtistNameInput) {
 
-        // append new artist to the bottom of the list
-        searchHistoryEl.innerHTML = ArtistNameInput;
-        search_results.appendChild(searchHistoryEl);        
-    }
+    //this pushes the value of ... to the searchHistory array
+    searchHistory.push(ArtistNameInput);
+    // verify if it shows the value of searchHistory
+    console.log(searchHistory);
+    // this sets the value of searchHistory to be filled in by the JSON
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
-    // function to load local storage data
-    var loadPreviousArtist = function () {
+    // append new artist to the bottom of the list
+    searchHistoryEl.innerHTML = ArtistNameInput;
+    search_results.appendChild(searchHistoryEl);
+}
+
+// function to load local storage data
+var loadPreviousArtist = function() {
         searchHistoryEl = "";
         // debugger;
         // function to pull / create the list items on the page if there is data
@@ -347,31 +347,30 @@ var getArtistName = function(event) {
             searchHistoryEl.setAttribute("id", searchHistory[i]);
             // populating the values in the html
             searchHistoryEl.innerHTML = searchHistory[i];
-            search_results.appendChild(searchHistoryEl); 
-            }
-    }
-//location.reload();
-    // function to search by previous search
-    function reSearch(event) {
-        // prevent from refreshing
-       // event.preventDefault();
-        // get value from input element 
-        var setArtistName = event.target.id;
-        
-        // shows if you click on the name what the value is 
-        console.log(setArtistName);
-
-        if (setArtistName) {
-            getArtistName(setArtistName);    
+            search_results.appendChild(searchHistoryEl);
         }
     }
-    loadPreviousArtist();
+    //location.reload();
+    // function to search by previous search
+function reSearch(event) {
+    // prevent from refreshing
+    // event.preventDefault();
+    // get value from input element 
+    var setArtistName = event.target.id;
+
+    // shows if you click on the name what the value is 
+    console.log(setArtistName);
+
+    if (setArtistName) {
+        getArtistName(setArtistName);
+    }
+}
+loadPreviousArtist();
 
 
-    //get ticket and album links
-    getTicketAndAlbum();
+//get ticket and album links
+getTicketAndAlbum();
 
 
 // event listener to get artist name input by user in the input text box
 artistNameForm.addEventListener('submit', getArtistName);
-

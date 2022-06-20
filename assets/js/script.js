@@ -23,6 +23,8 @@ var youtubeKey = "AIzaSyAVipUFCUajMgvasF6xv_p18pu4uLXmhcE";
 var youtubeUrl = 'https://www.youtube.com/watch?v=';
 var search = "";
 
+var photoUrl = "https://imsea.herokuapp.com/api/1?fmt=json&q=";
+
 var searchVideos = artistFullName;
 //console.log(apiLink)
 
@@ -260,6 +262,31 @@ var titleCase = function(str) {
     return result.join(" ");
 };
 
+// photo API
+
+function getImage () {
+    let fullPhotoUrl = photoUrl + artistAmazonSearch;
+    
+    fetch(fullPhotoUrl)
+    .then(function(response) {
+        response.json().then(function(data) {
+            console.log(data);
+            var photoIDOne = data.results[0];
+
+            console.log(photoIDOne)
+            displayImage();
+
+
+            function displayImage () {
+                let imageLink = document.querySelector("#photolink");
+
+                imageLink.setAttribute("src", photoIDOne);
+            }
+        })
+    })
+}
+
+
 // function to get artist name from input and split and remormat to lasnt name, first name
 var getArtistName = function(event) {
 
@@ -304,6 +331,9 @@ var getArtistName = function(event) {
 
     saveArtist(ArtistNameEntered);
     //loadPreviousArtist(ArtistNameEntered);
+
+    // function to load image 
+    getImage();
 
 }
 

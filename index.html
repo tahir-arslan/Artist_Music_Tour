@@ -14,15 +14,15 @@
 
 <body class="scroll-smooth">
     <!-- hero picture  -->
-    <header class="w-full bg-fixed bg-top md:bg-bottom bg-cover text-center py-4 sm:py-10 md:py-20">
+    <header class="w-full h-screen bg-fixed bg-top md:bg-bottom bg-cover text-center py-4 sm:py-10 md:py-20">
         <!-- welcome container -->
         <div class="border border-2 border-neutral-900 rounded-md color-bg backdrop-blur-sm mx-2 sm:mx-10 md:mx-20 lg:mx-40 py-2 sm:py-4 md:py-6 lg:py-10">
-            <h1 class="text-2xl md:text-3xl lg:text-5xl font-bold ">Welcome to <span class="primary-text-color ">Music Tours</span></h1>
+            <h1 class="text-2xl md:text-3xl lg:text-5xl font-bold drop-shadow">Welcome to <span class="primary-text-color drop-shadow">Music Tours</span></h1>
             <p class="font-bold text-sm md:text-lg lg:text-2xl py-2 sm:py-4 md:py-6 lg:py-10 ">Your one stop shop for all things <span class="secondary-text-color ">concert related</span>.</p>
             <!-- search bar -->
             <form id="artist-name-form" role="search">
-                <input id="input-artist-name" type="search" name="artist-name" placeholder="Enter Artists Name" size="50%" />
-                <button id="artist_search">
+                <input id="input-artist-name" type="search" name="artist-name" class="text-zinc-700" placeholder="Enter Artists Name" size="50%" />
+                <button type="button" id="artist_search" title="Search Artist/Band">
                             <svg viewBox="0 0 1024 1024">
                             <path class="search-icon" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path>
                             </svg>
@@ -31,12 +31,9 @@
         </div>
     </header>
     <!-- main content set to 3 rows -->
-    <main class="grid grid-row-3 justify-items-center py-4 sm:py-10 md:py-20 mx-2 sm:mx-10 md:mx-20 lg:mx-40">
+    <main class="grid grid-row-3 justify-items-center py-4 sm:py-10 md:py-20 mx-2 sm:mx-10 md:mx-20 lg:mx-40 hidden">
         <!-- 1st row:  picture and artist name -->
-        <div id="artist-header">
-            <img id="photolink" 
-            src="" 
-            alt="----------Placeholder Image, DELETE AFTER-------------">
+        <div class="" id="artist-header">
             <div class="rounded-md" id="artist-name-container">
                 <h2 class="relative px-w-1/2 text-center text-xl md:text-2xl lg:text-4xl font-bold capitalize px-4 py-2 color-bg" id="artist-name"></h2>
             </div>
@@ -48,7 +45,7 @@
                     <h3 class="font-bold text-lg md:text-2xl">Upcoming Concert(s)</h3>
                 </div>
                 <div id="concert-details" class="px-6 py-4 rounded-md">
-                    <ul id="concert-listings" class="pl-4 text-md md:text-lg lg:text-xl" style="list-style-type:circle"></ul>
+                    <ul id="concert-listings" class="pl-4 text-md md:text-lg lg:text-xl" style="list-style-type: circle;"></ul>
                 </div>
                 <button id="ticketbtn" class="rounded-md mt-auto m-4 bg-rose-800 p-2"> Buy Tickets</button>
             </div>
@@ -57,7 +54,7 @@
                     <h3 class="font-bold text-lg md:text-2xl">Discography</h3>
                 </div>
                 <div id="discography" class="px-6 py-4 rounded-md">
-                    <ul id="artist-discography" class="pl-4 text-md md:text-lg lg:text-xl" style="list-style-type:circle"></ul>
+                    <ul id="artist-discography" class="pl-4 text-md md:text-lg lg:text-xl" style="list-style-type: circle;"></ul>
                 </div>
                 <button id="albumbtn" class="rounded-md mt-auto m-4 bg-rose-800 p-2">Buy Albums</button>
             </div>
@@ -69,17 +66,15 @@
         </div>
     </main>
     <!-- search history -->
-    <footer class="bg-rose-900">
-        <div id="" class="py-4 sm:py-10 md:py-20 mx-2 sm:mx-10 md:mx-20 lg:mx-40">
+    <footer class="bg-rose-900 hidden">
+        <div id="past-searches" class="py-4 sm:py-10 md:py-20 mx-2 sm:mx-10 md:mx-20 lg:mx-40">
             <h4>Search History</h4>
             <ul id="past-searches"></ul>
             <div>
     </footer>
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js "></script>
     <script src="https://cdn.tailwindcss.com "></script>
     <script src="./assets/js/script.js "></script>
-
 </body>
 
 </html>

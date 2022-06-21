@@ -87,7 +87,7 @@ function getTicketAndAlbum() {
 
 
     getTicketButton.addEventListener("click", () => {
-        window.open("https://www.stubhub.ca/secure/search?q=" + artistFullNameButton, '_blank');
+        window.open("https://www.stubhub.ca/secure/search?q=" + artistFullName, '_blank');
         getAlbumButton.addEventListener("click", () => {
                 window.open("https://www.amazon.ca/s?k=" + artistAmazonSearch + "+albums&crid=98KX0UTYLA8M&sprefix=" + ArtistFirstName + ArtistLastName + "+albums%2Caps%2C93&ref=nb_sb_noss_1" + artistFullNameButton, "_blank");
             })
@@ -217,7 +217,7 @@ var getArtistReleases = function() {
                     var albumReleaseDate = data["release-groups"][i]["first-release-date"];
                     // creating <li> elements here and appending them to the discography location on page
                     var createLiItem = document.createElement("li");
-                    createLiItem.innerHTML = firstAlbumList + "(" + albumReleaseDate + ")";
+                    createLiItem.innerHTML = firstAlbumList + " ( " + albumReleaseDate + ")";
                     discographylocation.appendChild(createLiItem);
                 }
             })
@@ -264,26 +264,26 @@ var titleCase = function(str) {
 
 // photo API
 
-function getImage () {
+function getImage() {
     let fullPhotoUrl = photoUrl + artistAmazonSearch;
-    
+
     fetch(fullPhotoUrl)
-    .then(function(response) {
-        response.json().then(function(data) {
-            console.log(data);
-            var photoIDOne = data.results[0];
+        .then(function(response) {
+            response.json().then(function(data) {
+                console.log(data);
+                var photoIDOne = data.results[0];
 
-            console.log(photoIDOne)
-            displayImage();
+                console.log(photoIDOne)
+                displayImage();
 
 
-            function displayImage () {
-                let imageLink = document.querySelector("#photolink");
+                function displayImage() {
+                    let imageLink = document.querySelector("#photolink");
 
-                imageLink.setAttribute("src", photoIDOne);
-            }
+                    imageLink.setAttribute("src", photoIDOne);
+                }
+            })
         })
-    })
 }
 
 
@@ -335,6 +335,10 @@ var getArtistName = function(event) {
     // function to load image 
     getImage();
 
+    // remove hidden class to show results
+    $("main").removeClass("hidden");
+    $("header").removeClass("h-screen");
+    $("footer").removeClass("hidden");
 }
 
 // // event listener to get artist name input by user in the input text box

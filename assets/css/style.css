@@ -12,15 +12,19 @@ header {
 }
 
 .primary-text-color {
-    color: #C21858;
+    color: #ff7777;
 }
 
 .secondary-text-color {
-    color: #ee7fa4;
+    color: #ff9191;
 }
 
 .color-bg {
     background-color: rgba(43, 45, 70, 0.486);
+}
+
+.color-bg-text {
+    background-color: rgba(197, 197, 197, 0.13)
 }
 
 form {

@@ -348,7 +348,7 @@ var getArtistName = function(event) {
 // search history - pulls from local storage using the 'search' button and if it has no value, creates a new blank array
 var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
-var search_results = document.querySelector("#past-searches");
+var search_results = document.querySelector(".list-search-history");
 
 
 // function to save local storage data
@@ -363,8 +363,10 @@ var saveArtist = function(ArtistNameInput) {
 
     // append new artist to the bottom of the list
     searchHistoryEl.innerHTML = ArtistNameInput;
+    searchHistoryEl.setAttribute("id", ArtistNameInput);
     searchHistoryEl.classList.add("full-list");
     search_results.appendChild(searchHistoryEl);
+    searchHistoryEl.onclick = reSearch;
    
 }
 

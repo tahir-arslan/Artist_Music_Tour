@@ -353,7 +353,9 @@ var search_results = document.querySelector(".list-search-history");
 
 // function to save local storage data
 var saveArtist = function(ArtistNameInput) {
+
     var searchHistoryEl = document.createElement("li");
+
     //this pushes the value of ... to the searchHistory array
     searchHistory.push(ArtistNameInput);
     // verify if it shows the value of searchHistory
@@ -363,8 +365,12 @@ var saveArtist = function(ArtistNameInput) {
 
     // append new artist to the bottom of the list
     searchHistoryEl.innerHTML = ArtistNameInput;
+
     searchHistoryEl.setAttribute("id", ArtistNameInput);
+
     searchHistoryEl.classList.add("full-list");
+
+    
     search_results.appendChild(searchHistoryEl);
     searchHistoryEl.onclick = reSearch;
    

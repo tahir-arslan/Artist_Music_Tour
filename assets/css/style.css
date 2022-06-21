@@ -58,3 +58,20 @@ input {
     width: 100%;
     padding: 6px 6px;
 }
+
+
+/*footer style*/
+.list-search-history{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+.full-list{
+    background-color: gray;
+    border: solid 1px black;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 2px;
+}

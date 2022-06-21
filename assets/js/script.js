@@ -337,6 +337,8 @@ var getArtistName = function(event) {
 
     // remove hidden class to show results
     $("main").removeClass("hidden");
+    $("header").removeClass("h-screen");
+    $("footer").removeClass("hidden");
 }
 
 // // event listener to get artist name input by user in the input text box

@@ -1,62 +1,59 @@
-header{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-    margin: 5px;
-    padding-bottom: 10px;
+* {
+    font-family: 'Mulish', sans-serif;
 }
 
-main{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid black;
-    margin: 5px;
-    padding-bottom: 10px;
-}
-#concert{
-    display: flex-row;
-    width: 50%;
-    text-align: center;
-    border: 1px solid black;
-    margin: 5px;
-    padding-bottom: 10px;
+body {
+    background-color: rgb(16, 20, 32);
+    color: white;
 }
 
-#artist-bio{
+header {
+    background-image: url(/assets/images/concert-header-backsplash.jpg);
+}
+
+.primary-text-color {
+    color: #ff7777;
+}
+
+.secondary-text-color {
+    color: #ff9191;
+}
+
+.color-bg {
+    background-color: rgba(43, 45, 70, 0.486);
+}
+
+.color-bg-text {
+    background-color: rgba(197, 197, 197, 0.13)
+}
+
+form {
+    background-color: rgb(222, 219, 219);
     width: 50%;
+    border-radius: 5px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    flex-grow: 1;
-    border: 1px solid black;
-    margin: 5px;
-    padding-bottom: 10px;
+    justify-content: center;
+    padding: 0 5px;
+    margin: 0 auto;
 }
 
-footer{
-    display: flex-row;
-    justify-content: space-between;
-    text-align: center;
-    border: 1px solid black;
-    margin: 5px;
-    padding-bottom: 10px;
-}
-.video-container{
-    margin: 10px;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid black;
-    margin: 5px;
-    padding-bottom: 10px;
+svg {
+    color: rgb(82, 82, 82);
+    fill: currentColor;
+    width: 30px;
+    padding: 5px;
+    margin-left: 14px;
 }
 
-.video-item{
+#artist_search {
+    all: unset;
+    cursor: pointer;
+}
+
+input {
+    all: unset;
+    color: black;
     width: 100%;
-    border: 1px solid black;
-    margin: 5px;
-    padding-bottom: 10px;
-} 
+    padding: 6px 6px;
+}

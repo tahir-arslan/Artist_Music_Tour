@@ -277,10 +277,10 @@ function getImage () {
             displayImage();
 
 
-            function displayImage () {
+            function displayImage () {       
                 let imageLink = document.querySelector("#photolink");
 
-                imageLink.setAttribute("src", photoIDOne);
+                imageLink.setAttribute("src", photoIDOne);  
             }
         })
     })

@@ -344,10 +344,12 @@ var getArtistName = function(event) {
 var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
 var search_results = document.querySelector("#past-searches");
-var searchHistoryEl = document.createElement("li");
+
 
 // function to save local storage data
 var saveArtist = function(ArtistNameInput) {
+
+    var searchHistoryEl = document.createElement("li");
 
     //this pushes the value of ... to the searchHistory array
     searchHistory.push(ArtistNameInput);
@@ -358,6 +360,7 @@ var saveArtist = function(ArtistNameInput) {
 
     // append new artist to the bottom of the list
     searchHistoryEl.innerHTML = ArtistNameInput;
+    
     search_results.appendChild(searchHistoryEl);
 }
 

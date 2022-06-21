@@ -29,7 +29,7 @@ var searchVideos = "";
 //console.log(apiLink)
 
 //get 3 videos based on the user's serch
-var getVideos = function() { //searchVideos
+var getVideos = function(searchVideos) { //searchVideos
         videoContainer.innerHTML = "";
         console.log("this is the " + searchVideos);
         //if no valid input stop the function
@@ -349,11 +349,11 @@ var getArtistName = function(event) {
 var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
 var search_results = document.querySelector("#past-searches");
-var searchHistoryEl = document.createElement("li");
+
 
 // function to save local storage data
 var saveArtist = function(ArtistNameInput) {
-
+    var searchHistoryEl = document.createElement("li");
     //this pushes the value of ... to the searchHistory array
     searchHistory.push(ArtistNameInput);
     // verify if it shows the value of searchHistory
@@ -363,6 +363,7 @@ var saveArtist = function(ArtistNameInput) {
 
     // append new artist to the bottom of the list
     searchHistoryEl.innerHTML = ArtistNameInput;
+    searchHistoryEl.classList.add("full-list");
     search_results.appendChild(searchHistoryEl);
    
 }

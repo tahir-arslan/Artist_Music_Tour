@@ -25,18 +25,18 @@ var search = "";
 
 var photoUrl = "https://imsea.herokuapp.com/api/1?fmt=json&q=";
 
-var searchVideos = artistFullName;
+var searchVideos = "";
 //console.log(apiLink)
 
 //get 3 videos based on the user's serch
-var getVideos = function(video) { //searchVideos
+var getVideos = function(searchVideos) { //searchVideos
         videoContainer.innerHTML = "";
-        console.log("this is the " + artistFullName);
+        console.log("this is the " + searchVideos);
         //if no valid input stop the function
-        // if(!searchVideos){
-        //     return
-        // }else{
-        var url = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${youtubeKey}&q=${artistFullName}&maxResults=3`;
+        if(!searchVideos){
+            return
+        }else{
+        var url = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${youtubeKey}&q=${searchVideos}&maxResults=3`;
         fetch(url).then(function(response) {
             console.log(url)
             console.log(response)
@@ -60,7 +60,7 @@ var getVideos = function(video) { //searchVideos
             }
         });
     }
-    // };
+ };
 
 let getTicketButton = document.querySelector("#ticketbtn");
 let getAlbumButton = document.querySelector("#albumbtn");
@@ -84,10 +84,8 @@ function getTicketAndAlbum() {
     let enterNameValue = artistNameInput.value;
     console.log(enterNameValue);
 
-
-
     getTicketButton.addEventListener("click", () => {
-        window.open("https://www.stubhub.ca/secure/search?q=" + artistFullNameButton, '_blank');
+        window.open("https://www.stubhub.ca/secure/search?q=" + artistFullName, '_blank');
         getAlbumButton.addEventListener("click", () => {
                 window.open("https://www.amazon.ca/s?k=" + artistAmazonSearch + "+albums&crid=98KX0UTYLA8M&sprefix=" + ArtistFirstName + ArtistLastName + "+albums%2Caps%2C93&ref=nb_sb_noss_1" + artistFullNameButton, "_blank");
             })
@@ -95,8 +93,6 @@ function getTicketAndAlbum() {
     });
 
 }
-
-
 
 
 // songkick APi Key
@@ -116,9 +112,6 @@ var ArtistLastName = "";
 var artistNameSearchCriteria = "";
 
 
-// artist id as brought back from  musicbrainz
-var artistFullID = "";
-
 // global variable for the artist name entered so it can be used in other functions
 var artistFullName = "";
 
@@ -128,6 +121,7 @@ var ArtistDiscogFirstAlbum = "";
 
 // function to set data elements in HTML - so far just Artist Name
 var setArtistName = function() {
+    console.log(artistFullName + " set artist name")
     document.getElementById("artist-name").innerHTML = artistFullName;
 }
 
@@ -217,7 +211,7 @@ var getArtistReleases = function() {
                     var albumReleaseDate = data["release-groups"][i]["first-release-date"];
                     // creating <li> elements here and appending them to the discography location on page
                     var createLiItem = document.createElement("li");
-                    createLiItem.innerHTML = firstAlbumList + "(" + albumReleaseDate + ")";
+                    createLiItem.innerHTML = firstAlbumList + " ( " + albumReleaseDate + ")";
                     discographylocation.appendChild(createLiItem);
                 }
             })
@@ -264,77 +258,88 @@ var titleCase = function(str) {
 
 // photo API
 
-function getImage () {
+function getImage() {
     let fullPhotoUrl = photoUrl + artistAmazonSearch;
-    
+
     fetch(fullPhotoUrl)
-    .then(function(response) {
-        response.json().then(function(data) {
-            console.log(data);
-            var photoIDOne = data.results[0];
+        .then(function(response) {
+            response.json().then(function(data) {
+                console.log(data);
+                var photoIDOne = data.results[0];
 
-            console.log(photoIDOne)
-            displayImage();
+                console.log(photoIDOne)
+                displayImage();
 
 
-            function displayImage () {       
-                let imageLink = document.querySelector("#photolink");
+                function displayImage() {
+                    let imageLink = document.querySelector("#photolink");
 
-                imageLink.setAttribute("src", photoIDOne);  
-            }
+                    imageLink.setAttribute("src", photoIDOne);
+                }
+            })
         })
-    })
 }
 
 
 // function to get artist name from input and split and remormat to lasnt name, first name
 var getArtistName = function(event) {
-
-    console.log(event);
-
-    var ArtistNameEntered = artistNameInput.value.trim() || event;
-    artistFullName = ArtistNameEntered;
-
-    // if you are submitting a form (prevents page reload)
     event.preventDefault();
+    console.log(event +" test");
+    //if artist name null send an alert
+    if(!artistNameInput.value.trim()){
+        return alert("Enter a valid artist")
+    }
+    else{
+        var ArtistNameEntered = artistNameInput.value.trim() //|| event;
+        artistFullName = ArtistNameEntered;
 
-    artistAmazonSearch = ArtistNameEntered;
-    //clear the input text
-    artistNameInput.value = "";
+        // if you are submitting a form (prevents page reload)
+        
 
-    //transfer the artisti name and add 1st letter in upper case.
-    artistFullName = titleCase(ArtistNameEntered);
+        artistAmazonSearch = ArtistNameEntered;
+        //clear the input text
+        artistNameInput.value = "";
 
-    // splitting the artist name entered at the space
-    artistNameSplit = artistFullName.split(" ");
+        //transfer the artisti name and add 1st letter in upper case.
+        artistFullName = titleCase(ArtistNameEntered);
 
-    //setting the first name of the artist search 
-    ArtistFirstName = artistNameSplit[0];
+        // splitting the artist name entered at the space
+        artistNameSplit = artistFullName.split(" ");
 
-    // setting the last name of the artist search
-    ArtistLastName = artistNameSplit[1];
+        //setting the first name of the artist search 
+        ArtistFirstName = artistNameSplit[0];
 
-    // creating teh musicbrainz required search query format of artist last name, first name
-    artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
-    artistFullNameButton = (ArtistFirstName + "%20" + ArtistLastName);
+        // setting the last name of the artist search
+        ArtistLastName = artistNameSplit[1];
 
-    // calling the function to get youtube content and passing it the artist's full name
-    getVideos(artistFullName);
+        // creating teh musicbrainz required search query format of artist last name, first name
+        artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
+        artistFullNameButton = (ArtistFirstName + "%20" + ArtistLastName);
 
-    // calling the function to call teh musicbrainz api to get artist ID and info
-    getArtistInformation();
+        // calling the function to get youtube content and passing it the artist's full name
+        getVideos(artistFullName);
 
-    //function to set the artist name as search entered
-    setArtistName();
+        // calling the function to call teh musicbrainz api to get artist ID and info
+        getArtistInformation();
 
-    // function to save localStorage using the value within the function
+        //function to set the artist name as search entered
+        setArtistName();
 
-    saveArtist(ArtistNameEntered);
-    //loadPreviousArtist(ArtistNameEntered);
+        // function to save localStorage using the value within the function
 
-    // function to load image 
-    getImage();
+        saveArtist(ArtistNameEntered);
+        //loadPreviousArtist(ArtistNameEntered);
 
+        // function to load image 
+        getImage();
+
+        // remove hidden class to show results
+        $("main").removeClass("hidden");
+        $("header").removeClass("h-screen");
+        $("footer").removeClass("hidden");
+        
+    }
+    
 }
 
 // // event listener to get artist name input by user in the input text box
@@ -343,11 +348,13 @@ var getArtistName = function(event) {
 // search history - pulls from local storage using the 'search' button and if it has no value, creates a new blank array
 var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
-var search_results = document.querySelector("#past-searches");
-var searchHistoryEl = document.createElement("li");
+var search_results = document.querySelector(".list-search-history");
+
 
 // function to save local storage data
 var saveArtist = function(ArtistNameInput) {
+
+    var searchHistoryEl = document.createElement("li");
 
     //this pushes the value of ... to the searchHistory array
     searchHistory.push(ArtistNameInput);
@@ -358,7 +365,15 @@ var saveArtist = function(ArtistNameInput) {
 
     // append new artist to the bottom of the list
     searchHistoryEl.innerHTML = ArtistNameInput;
+
+    searchHistoryEl.setAttribute("id", ArtistNameInput);
+
+    searchHistoryEl.classList.add("full-list");
+
+    
     search_results.appendChild(searchHistoryEl);
+    searchHistoryEl.onclick = reSearch;
+   
 }
 
 // function to load local storage data
@@ -368,12 +383,17 @@ var loadPreviousArtist = function() {
         // function to pull / create the list items on the page if there is data
         for (i = 0; i < searchHistory.length; i++) {
             // variables for search results
-            var search_results = document.querySelector("#past-searches");
+            //var search_results = document.querySelector("#past-searches");
+            var search_results = document.querySelector(".list-search-history");
             var searchHistoryEl = document.createElement("li");
             // when clicking on the searchHistoryEl (values from previous), the function reSearch is actioned
             searchHistoryEl.onclick = reSearch;
             // setting the value on past-searches
             searchHistoryEl.setAttribute("id", searchHistory[i]);
+
+            //new class name
+            searchHistoryEl.classList.add("full-list");
+
             // populating the values in the html
             searchHistoryEl.innerHTML = searchHistory[i];
             search_results.appendChild(searchHistoryEl);
@@ -385,13 +405,35 @@ function reSearch(event) {
     // prevent from refreshing
     // event.preventDefault();
     // get value from input element 
-    var setArtistName = event.target.id;
+    var defineArtistName = event.target.id;
 
     // shows if you click on the name what the value is 
-    console.log(setArtistName);
+    console.log(defineArtistName);
+    //if function triggered by searrch history
+    if (defineArtistName) {
+        getVideos(defineArtistName);
+        artistNameSearchCriteria = defineArtistName
+        artistFullName = defineArtistName;
+        artistAmazonSearch = defineArtistName;
+        //transfer the artisti name and add 1st letter in upper case.
+        artistFullName = titleCase(defineArtistName);
 
-    if (setArtistName) {
-        getArtistName(setArtistName);
+        // splitting the artist name entered at the space
+        artistNameSplit = artistFullName.split(" ");
+
+        //setting the first name of the artist search 
+        ArtistFirstName = artistNameSplit[0];
+
+        // setting the last name of the artist search
+        ArtistLastName = artistNameSplit[1];
+
+        // creating teh musicbrainz required search query format of artist last name, first name
+        artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
+        artistFullNameButton = (ArtistFirstName + "%20" + ArtistLastName);
+
+        getArtistInformation();
+        setArtistName();
+        getImage();
     }
 }
 loadPreviousArtist();

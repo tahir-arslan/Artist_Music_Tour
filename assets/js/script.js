@@ -17,11 +17,10 @@ var youtubeKey = "AIzaSyAVipUFCUajMgvasF6xv_p18pu4uLXmhcE";
 
 // photo API
 function getImage() {
-    fetch("https://serpapi.com/playground?q=" + artistAmazonSearch + "&tbm=isch&ijn=0")
+    fetch("https://imsea.herokuapp.com/api/1?fmt=json&q=" + artistAmazonSearch)
         .then(function(response) {
             response.json().then(function(data) {
-                var photoIDOne = images_results;
-                console.log(photoIDOne.link);
+                var photoIDOne = data.results[0];
                 displayImage();
 
                 function displayImage() {
@@ -31,20 +30,6 @@ function getImage() {
             })
         })
 }
-// function getImage() {
-//     fetch("https://imsea.herokuapp.com/api/1?fmt=json&q=" + artistAmazonSearch)
-//         .then(function(response) {
-//             response.json().then(function(data) {
-//                 var photoIDOne = data.results[0];
-//                 displayImage();
-
-//                 function displayImage() {
-//                     let imageLink = document.querySelector("#photolink");
-//                     imageLink.setAttribute("src", photoIDOne);
-//                 }
-//             })
-//         })
-// }
 
 function getTicketAndAlbum() {
     $("#ticketbtn").on("click", () => {

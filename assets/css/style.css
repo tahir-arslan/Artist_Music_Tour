@@ -11,12 +11,8 @@ header {
     background-image: url(../images/concert-header-backsplash.jpg);
 }
 
-.primary-text-color {
+.highlight-text-color {
     color: #ff7777;
-}
-
-.secondary-text-color {
-    color: #ff9191;
 }
 
 .color-bg {

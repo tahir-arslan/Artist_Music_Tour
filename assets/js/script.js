@@ -15,6 +15,63 @@ var songkickAPIKey = "io09K9l3ebJxmxe2";
 var youtubeKey = "AIzaSyAVipUFCUajMgvasF6xv_p18pu4uLXmhcE";
 // var youtubeKey2 = "AIzaSyDeq0kG7KnVPtEpNdA7e3FTalceIrNWU2o";
 
+// function to get artist name from input and split and reformat to last name, first name
+var getArtistName = function(event) {
+    event.preventDefault();
+    //if artist name null send an alert
+    if (!artistNameInput.value.trim()) {
+        return;
+    } else {
+        artistFullName = artistNameInput.value.trim();
+        manipulateName(artistFullName);
+        // function to load image 
+        getImage();
+        // remove hidden class to show results
+        $("main").removeClass("hidden");
+        $("header").removeClass("h-screen");
+        $("footer").removeClass("hidden");
+        // scroll to main content
+        $('body, html').animate({ scrollTop: $("#main-content").offset().top });
+    }
+}
+
+function manipulateName() {
+    artistAmazonSearch = artistFullName;
+    //clear the input text
+    artistNameInput.value = "";
+    // splitting the artist name entered at the space
+    var artistNameSplit = artistFullName.split(" ");
+    ArtistFirstName = artistNameSplit[0];
+    ArtistLastName = artistNameSplit[1];
+    // creating the musicbrainz required search query format of artist last name, first name
+    artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
+    artistFullNameButton = (ArtistFirstName + "%20" + ArtistLastName);
+    // calling the function to get youtube content and passing it the artist's full name
+    getVideos(artistFullName);
+    // calling the function to call teh musicbrainz api to get artist ID and info
+    getArtistInformation();
+    //function to set the artist name as search entered
+    $("#artist-name").text(artistFullName)
+        // function to save localStorage using the value within the function
+    saveArtist(artistFullName);
+}
+
+// function to get artist information - mostly to grab ID so we can send it to get discography
+var getArtistInformation = function() {
+    // varible for URL that includes artist name in new format last name, first name and asking for JSON format
+    var apiURL = "https://musicbrainz.org/ws/2/artist/?query=artist:" + artistNameSearchCriteria + "%20AND%20&fmt=json";
+    fetch(apiURL).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                // setting id for artist name so we can pass it through the  get discopgraphy releases function
+                artistFullID = data.artists[0].id;
+                // calling function to get artist discography releases from musicbrainz API
+                getArtistReleases();
+            });
+        }
+    });
+};
+
 // photo API
 function getImage() {
     fetch("https://imsea.herokuapp.com/api/1?fmt=json&q=" + artistAmazonSearch)
@@ -98,61 +155,6 @@ var getArtistReleases = function() {
     getArtistConcerts();
 }
 
-// function to get artist information - mostly to grab ID so we can send it to get discography
-var getArtistInformation = function() {
-    // varible for URL that includes artist name in new format last name, first name and asking for JSON format
-    var apiURL = "https://musicbrainz.org/ws/2/artist/?query=artist:" + artistNameSearchCriteria + "%20AND%20&fmt=json";
-    fetch(apiURL).then(function(response) {
-        if (response.ok) {
-            response.json().then(function(data) {
-                // setting id for artist name so we can pass it through the  get discopgraphy releases function
-                artistFullID = data.artists[0].id;
-                // calling function to get artist discography releases from musicbrainz API
-                getArtistReleases();
-            });
-        }
-    });
-};
-
-// function to get artist name from input and split and reformat to last name, first name
-var getArtistName = function(event) {
-    event.preventDefault();
-    //if artist name null send an alert
-    if (!artistNameInput.value.trim()) {
-        return;
-    } else {
-        artistFullName = artistNameInput.value.trim();
-        manipulateName(artistFullName);
-        // function to load image 
-        getImage();
-        // remove hidden class to show results
-        $("main").removeClass("hidden");
-        $("header").removeClass("h-screen");
-        $("footer").removeClass("hidden");
-    }
-}
-
-function manipulateName() {
-    artistAmazonSearch = artistFullName;
-    //clear the input text
-    artistNameInput.value = "";
-    // splitting the artist name entered at the space
-    var artistNameSplit = artistFullName.split(" ");
-    ArtistFirstName = artistNameSplit[0];
-    ArtistLastName = artistNameSplit[1];
-    // creating the musicbrainz required search query format of artist last name, first name
-    artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
-    artistFullNameButton = (ArtistFirstName + "%20" + ArtistLastName);
-    // calling the function to get youtube content and passing it the artist's full name
-    getVideos(artistFullName);
-    // calling the function to call teh musicbrainz api to get artist ID and info
-    getArtistInformation();
-    //function to set the artist name as search entered
-    $("#artist-name").text(artistFullName)
-        // function to save localStorage using the value within the function
-    saveArtist(artistFullName);
-}
-
 //get 3 videos based on the user's search
 var getVideos = function(searchVideos) { //searchVideos
     var videoContainer = document.querySelector("#video-container");
@@ -170,7 +172,7 @@ var getVideos = function(searchVideos) { //searchVideos
                     for (video of videos) {
                         videoContainer.innerHTML += `
                         <div class="grid-cols-1 h-auto rounded-md color-bg shadow-xl">
-                            <a href="'https://www.youtube.com/watch?v=' + ${video.id.videoId}" class="video-link" target="_blank">
+                            <a href="https://www.youtube.com/watch?v=${video.id.videoId}" class="video-link" target="_blank">
                             <img class="w-full rounded-t-md bg-cover bg-center" src="${video.snippet.thumbnails.default.url}" />
                             <p class="p-2">${video.snippet.title}</p>
                             </a>
@@ -178,7 +180,7 @@ var getVideos = function(searchVideos) { //searchVideos
                     };
                 });
             } else {
-                return
+                return;
             }
         });
     }
@@ -227,6 +229,8 @@ function reSearch(event) {
         manipulateName();
         getImage();
     }
+    // scroll to main content
+    $('body, html').animate({ scrollTop: $("#main-content").offset().top });
 }
 
 loadPreviousArtist();

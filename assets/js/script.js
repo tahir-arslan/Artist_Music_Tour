@@ -23,13 +23,13 @@ var youtubeKey = "AIzaSyAVipUFCUajMgvasF6xv_p18pu4uLXmhcE";
 var youtubeUrl = 'https://www.youtube.com/watch?v=';
 var search = "";
 
-var photoUrl = "https://imsea.herokuapp.com/api/1?fmt=json&q=";
+var photoUrl = "https://cors-anywhere.herokuapp.com/https://imsea.herokuapp.com/api/1?fmt=json&q=";
 
 var searchVideos = "";
 //console.log(apiLink)
 
 //get 3 videos based on the user's serch
-var getVideos = function(searchVideos) { //searchVideos
+var getVideos = function() { //searchVideos
         videoContainer.innerHTML = "";
         console.log("this is the " + searchVideos);
         //if no valid input stop the function
@@ -260,7 +260,7 @@ var titleCase = function(str) {
 
 function getImage() {
     let fullPhotoUrl = photoUrl + artistAmazonSearch;
-
+    setTimeout(function(){ 
     fetch(fullPhotoUrl)
         .then(function(response) {
             response.json().then(function(data) {
@@ -278,6 +278,7 @@ function getImage() {
                 }
             })
         })
+    }, 50);
 }
 
 

@@ -74,18 +74,22 @@ var getArtistInformation = function() {
 
 // photo API
 function getImage() {
-    fetch("https://imsea.herokuapp.com/api/1?fmt=json&q=" + artistAmazonSearch)
-        .then(function(response) {
-            response.json().then(function(data) {
-                var photoIDOne = data.results[0];
-                displayImage();
+    var photoUrl = "https://cors-anywhere.herokuapp.com/https://imsea.herokuapp.com/api/1?fmt=json";
+    let fullPhotoUrl = photoUrl + artistAmazonSearch;
+    setTimeout(function() {
+        fetch(fullPhotoUrl)
+            .then(function(response) {
+                response.json().then(function(data) {
+                    var photoIDOne = data.results[0];
+                    displayImage();
 
-                function displayImage() {
-                    let imageLink = document.querySelector("#photolink");
-                    imageLink.setAttribute("src", photoIDOne);
-                }
+                    function displayImage() {
+                        let imageLink = document.querySelector("#photolink");
+                        imageLink.setAttribute("src", photoIDOne);
+                    }
+                })
             })
-        })
+    }, 50);
 }
 
 function getTicketAndAlbum() {

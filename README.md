@@ -7,6 +7,16 @@ Our team then came up with the following requirements to meet our application de
 
 ![alt_tag](https://github.com/Vinyldude8896/Artist_Music_Tour/blob/develop/assets/images/Ask.png)
 
+## Technologies Used:
+- HTML
+- CSS
+- JS
+- Tailwind
+- YouTube API
+- SongKick API
+- MusicBrainz API
+- Imsea API
+
 In order to achieve these requirements, we needed to ensure the following was completed:
 
 ![alt_tag](https://github.com/Vinyldude8896/Artist_Music_Tour/blob/develop/assets/images/Requirement.png)

@@ -15,46 +15,7 @@ var songkickAPIKey = "io09K9l3ebJxmxe2";
 var youtubeKey = "AIzaSyAVipUFCUajMgvasF6xv_p18pu4uLXmhcE";
 // var youtubeKey2 = "AIzaSyDeq0kG7KnVPtEpNdA7e3FTalceIrNWU2o";
 
-// function to get artist name from input and split and reformat to last name, first name
-var getArtistName = function(event) {
-    event.preventDefault();
-    //if artist name null send an alert
-    if (!artistNameInput.value.trim()) {
-        return;
-    } else {
-        artistFullName = artistNameInput.value.trim();
-        manipulateName(artistFullName);
-        // function to load image 
-        getImage();
-        // remove hidden class to show results
-        $("main").removeClass("hidden");
-        $("header").removeClass("h-screen");
-        $("footer").removeClass("hidden");
-        // scroll to main content
-        $('body, html').animate({ scrollTop: $("#main-content").offset().top });
-    }
-}
 
-function manipulateName() {
-    artistAmazonSearch = artistFullName;
-    //clear the input text
-    artistNameInput.value = "";
-    // splitting the artist name entered at the space
-    var artistNameSplit = artistFullName.split(" ");
-    ArtistFirstName = artistNameSplit[0];
-    ArtistLastName = artistNameSplit[1];
-    // creating the musicbrainz required search query format of artist last name, first name
-    artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
-    artistFullNameButton = (ArtistFirstName + "%20" + ArtistLastName);
-    // calling the function to get youtube content and passing it the artist's full name
-    getVideos(artistFullName);
-    // calling the function to call teh musicbrainz api to get artist ID and info
-    getArtistInformation();
-    //function to set the artist name as search entered
-    $("#artist-name").text(artistFullName)
-        // function to save localStorage using the value within the function
-    saveArtist(artistFullName);
-}
 
 // function to get artist information - mostly to grab ID so we can send it to get discography
 var getArtistInformation = function() {
@@ -235,6 +196,27 @@ function reSearch(event) {
     }
     // scroll to main content
     $('body, html').animate({ scrollTop: $("#main-content").offset().top });
+}
+
+function manipulateName() {
+    artistAmazonSearch = artistFullName;
+    //clear the input text
+    artistNameInput.value = "";
+    // splitting the artist name entered at the space
+    var artistNameSplit = artistFullName.split(" ");
+    ArtistFirstName = artistNameSplit[0];
+    ArtistLastName = artistNameSplit[1];
+    // creating the musicbrainz required search query format of artist last name, first name
+    artistNameSearchCriteria = (ArtistLastName + "," + ArtistFirstName);
+    artistFullNameButton = (ArtistFirstName + "%20" + ArtistLastName);
+    // calling the function to get youtube content and passing it the artist's full name
+    getVideos(artistFullName);
+    // calling the function to call teh musicbrainz api to get artist ID and info
+    getArtistInformation();
+    //function to set the artist name as search entered
+    $("#artist-name").text(artistFullName)
+        // function to save localStorage using the value within the function
+    saveArtist(artistFullName);
 }
 
 loadPreviousArtist();
